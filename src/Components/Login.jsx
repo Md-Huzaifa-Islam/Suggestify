@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Contexts/Contexts";
 
 const Login = () => {
-  const { signInWithEmail } = useContext(AuthContext);
+  const { signInWithEmail, signWithGmail } = useContext(AuthContext);
   const handleLogin = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -13,6 +13,13 @@ const Login = () => {
         console.log(user.user);
         e.target.reset();
       })
+      .catch((err) => console.log(err));
+  };
+
+  //gmail login section
+  const handleGmail = () => {
+    signWithGmail()
+      .then((user) => console.log(user.user))
       .catch((err) => console.log(err));
   };
   return (
@@ -57,7 +64,7 @@ const Login = () => {
             </div>
           </form>
           <div className="divider">OR</div>
-          <button>Login with Google</button>
+          <button onClick={handleGmail}>Login with Google</button>
           <p className="mx-auto">
             Don&apos;t have any account?{" "}
             <Link to={"/register"} className="text-xl">

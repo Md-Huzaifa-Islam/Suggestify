@@ -8,6 +8,7 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import ErrorPage from "./Components/ErrorPage";
 import AuthProvider from "./Providers/AuthProvider";
+import ProtectedRoute from "./Providers/ProtectedRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/register",
-        element: <Register />,
+        element: (
+          <ProtectedRoute>
+            <Register />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

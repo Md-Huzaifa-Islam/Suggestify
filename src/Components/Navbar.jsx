@@ -10,21 +10,21 @@ const Navbar = () => {
         <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={"/link"}>Queries</NavLink>
+        <NavLink to={"/queries"}>Queries</NavLink>
       </li>
       {user && (
         <li>
-          <NavLink to={"/link"}>Recommendations For Me</NavLink>
+          <NavLink to={"/recommendationsforme"}>Recommendations For Me</NavLink>
         </li>
       )}
       {user && (
         <li>
-          <NavLink to={"/link"}>My Queries</NavLink>
+          <NavLink to={"/myqueries"}>My Queries</NavLink>
         </li>
       )}
       {user && (
         <li>
-          <NavLink to={"/link"}>My Recommendations</NavLink>
+          <NavLink to={"/myrecommendations"}>My Recommendations</NavLink>
         </li>
       )}
     </>
