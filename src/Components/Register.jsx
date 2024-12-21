@@ -1,6 +1,30 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Contexts/Contexts";
 
 const Register = () => {
+  const { singUpWithEmail, UpdateInfo, signWithGmail } =
+    useContext(AuthContext);
+  //login with email
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formObject = Object.fromEntries(formData.entries());
+    singUpWithEmail(formObject.email, formObject.password)
+      .then((user) => {
+        console.log(user.user);
+        UpdateInfo(formObject.name, formObject.photo)
+          .then(() => console.log("profile updated"))
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  };
+  //gmail login section
+  const handleGmail = () => {
+    signWithGmail()
+      .then((user) => console.log(user.user))
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="hero">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -12,8 +36,8 @@ const Register = () => {
             a id nisi.
           </p>
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 pb-8 shadow-2xl">
-          <form className="card-body">
+        <div className="card w-full max-w-sm shrink-0 bg-base-100 pb-8 shadow-2xl">
+          <form className="card-body" onSubmit={handleSignUp}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -21,6 +45,7 @@ const Register = () => {
               <input
                 type="text"
                 placeholder="Name"
+                name="name"
                 className="input input-bordered"
                 required
               />
@@ -32,6 +57,7 @@ const Register = () => {
               <input
                 type="email"
                 placeholder="email"
+                name="email"
                 className="input input-bordered"
                 required
               />
@@ -43,6 +69,7 @@ const Register = () => {
               <input
                 type="password"
                 placeholder="password"
+                name="password"
                 className="input input-bordered"
                 required
               />
@@ -54,6 +81,7 @@ const Register = () => {
               <input
                 type="url"
                 placeholder="PhotoUrl"
+                name="photo"
                 className="input input-bordered"
                 required
               />
@@ -63,7 +91,7 @@ const Register = () => {
             </div>
           </form>
           <div className="divider">OR</div>
-          <button>Register with Google</button>
+          <button onClick={handleGmail}>Register with Google</button>
           <p className="mx-auto">
             Already have an account?{" "}
             <Link to={"/login"} className="text-xl">

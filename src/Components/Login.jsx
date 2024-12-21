@@ -1,6 +1,20 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Contexts/Contexts";
 
 const Login = () => {
+  const { signInWithEmail } = useContext(AuthContext);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formObject = Object.fromEntries(formData.entries());
+    signInWithEmail(formObject.email, formObject.password)
+      .then((user) => {
+        console.log(user.user);
+        e.target.reset();
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="hero">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -12,14 +26,15 @@ const Login = () => {
             nisi.
           </p>
         </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 pb-8 shadow-2xl">
-          <form className="card-body">
+        <div className="card w-full max-w-sm shrink-0 bg-base-100 pb-8 shadow-2xl">
+          <form className="card-body" onSubmit={handleLogin}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="email"
+                name="email"
                 placeholder="email"
                 className="input input-bordered"
                 required
@@ -31,6 +46,7 @@ const Login = () => {
               </label>
               <input
                 type="password"
+                name="password"
                 placeholder="password"
                 className="input input-bordered"
                 required
