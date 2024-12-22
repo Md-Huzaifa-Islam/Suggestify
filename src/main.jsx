@@ -9,6 +9,8 @@ import Register from "./Components/Register";
 import ErrorPage from "./Components/ErrorPage";
 import AuthProvider from "./Providers/AuthProvider";
 import ProtectedRoute from "./Providers/ProtectedRoute";
+import AddQuery from "./Components/AddQuery";
+import MyQueries from "./Components/MyQueries";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
             <Register />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "/addquery",
+        element: <AddQuery />,
+      },
+      {
+        path: "/myqueries",
+        element: <MyQueries />,
       },
     ],
   },
