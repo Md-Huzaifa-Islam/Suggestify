@@ -30,19 +30,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/addquery",
         element: (
           <ProtectedRoute>
-            <Register />
+            <AddQuery />
           </ProtectedRoute>
         ),
       },
       {
-        path: "/addquery",
-        element: <AddQuery />,
-      },
-      {
         path: "/myqueries",
-        element: <MyQueries />,
+        element: (
+          <ProtectedRoute>
+            <MyQueries />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/queries",
@@ -54,11 +58,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/myrecommendations",
-        element: <MyRecommendationsContainer />,
+        element: (
+          <ProtectedRoute>
+            <MyRecommendationsContainer />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/recommendationsforme",
-        element: <RecommendationForMeContainer />,
+        element: (
+          <ProtectedRoute>
+            <RecommendationForMeContainer />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

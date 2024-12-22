@@ -1,4 +1,46 @@
+import { useContext } from "react";
+import { AuthContext } from "../Contexts/Contexts";
+
 const QueryDetails = () => {
+  const { user } = useContext(AuthContext);
+
+  //data came for this product
+  const data = {
+    _id: "67678797c43b49285a05c440",
+    boycotting_reason_details: "Battery drains too quickly.",
+    created: 1734741201000,
+
+    owner: {
+      email: "user2@example.com",
+      name: "Jane Smith",
+      photo: "https://via.placeholder.com/50",
+    },
+    product_brand: "BrandY",
+    product_image_url: "https://via.placeholder.com/150",
+    product_name: "Laptop ABC",
+    query_tItle: "Can I get a laptop with more RAM in this range?",
+    recommendationCount: 3,
+  };
+
+  // handle add new recommendation
+  const handleSubmitRecommendation = (e) => {
+    e.preventDefault();
+    const formdata = new FormData(e.target);
+    const formObject = Object.fromEntries(formdata.entries());
+    formObject.created = Date.now();
+    formObject.recommender = {
+      email: user?.email,
+      name: user?.displayName,
+      photo: user?.photoURL,
+    };
+    formObject.owner = { ...data.owner };
+    formObject.main_product = {
+      id: data._id,
+      query_tItle: data.query_tItle,
+      product_name: data.product_name,
+    };
+    console.log(formObject);
+  };
   return (
     <div className="mx-auto max-w-4xl p-6">
       {/* Query Information */}
@@ -22,63 +64,58 @@ const QueryDetails = () => {
       {/* Add Recommendation Form */}
       <div className="mb-6 rounded-md border p-4 shadow-sm">
         <h2 className="mb-4 text-xl font-semibold">Add a Recommendation</h2>
-        <form>
-          <div className="mb-4">
-            <label
-              htmlFor="recommendationTitle"
-              className="mb-1 block font-medium"
-            >
-              Recommendation Title
+        <form className="card-body" onSubmit={handleSubmitRecommendation}>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Recommendation Title</span>
             </label>
             <input
               type="text"
-              id="recommendationTitle"
-              className="w-full rounded-md border p-2"
-              placeholder="Enter title"
+              name="title"
+              placeholder="Recommendation Title"
+              className="input input-bordered"
+              required
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="productName" className="mb-1 block font-medium">
-              Recommended Product Name
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Recommended product Name</span>
             </label>
             <input
               type="text"
-              id="productName"
-              className="w-full rounded-md border p-2"
-              placeholder="Enter product name"
+              name="product_name"
+              placeholder="email"
+              className="input input-bordered"
+              required
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="productImage" className="mb-1 block font-medium">
-              Recommended Product Image URL
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Recommended Product Image</span>
             </label>
             <input
               type="url"
-              id="productImage"
-              className="w-full rounded-md border p-2"
-              placeholder="Enter image URL"
+              name="product_image_url"
+              placeholder="Recommended Product Image"
+              className="input input-bordered"
+              required
             />
           </div>
-          <div className="mb-4">
-            <label
-              htmlFor="recommendationReason"
-              className="mb-1 block font-medium"
-            >
-              Recommendation Reason
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Recommendation reason</span>
             </label>
-            <textarea
-              id="recommendationReason"
-              className="w-full rounded-md border p-2"
-              placeholder="Why do you recommend this?"
-              rows="3"
-            ></textarea>
+            <input
+              type="text"
+              name="Recommending_reason_details"
+              placeholder="Recommendation reason"
+              className="input input-bordered"
+              required
+            />
           </div>
-          <button
-            type="button"
-            className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-          >
-            Add Recommendation
-          </button>
+          <div className="form-control mt-6">
+            <button className="btn btn-primary">Login</button>
+          </div>
         </form>
       </div>
 
