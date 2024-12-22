@@ -11,6 +11,8 @@ import AuthProvider from "./Providers/AuthProvider";
 import ProtectedRoute from "./Providers/ProtectedRoute";
 import AddQuery from "./Components/AddQuery";
 import MyQueries from "./Components/MyQueries";
+import AllQueriesContainer from "./Components/AllQueriesContainer";
+import QueryDetails from "./Components/QueryDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
       {
         path: "/myqueries",
         element: <MyQueries />,
+      },
+      {
+        path: "/queries",
+        element: <AllQueriesContainer />,
+      },
+      {
+        path: "/queryDetails",
+        element: <QueryDetails />,
       },
     ],
   },
