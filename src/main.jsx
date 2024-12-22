@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         element: <AllQueriesContainer />,
       },
       {
-        path: "/queryDetails",
+        path: "/queryDetails/:id",
         element: <QueryDetails />,
       },
       {
