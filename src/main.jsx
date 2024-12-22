@@ -13,6 +13,8 @@ import AddQuery from "./Components/AddQuery";
 import MyQueries from "./Components/MyQueries";
 import AllQueriesContainer from "./Components/AllQueriesContainer";
 import QueryDetails from "./Components/QueryDetails";
+import MyRecommendationsContainer from "./Components/MyRecommendationsContainer";
+import RecommendationForMeContainer from "./Components/RecommendationForMeContainer";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +51,14 @@ const router = createBrowserRouter([
       {
         path: "/queryDetails",
         element: <QueryDetails />,
+      },
+      {
+        path: "/myrecommendations",
+        element: <MyRecommendationsContainer />,
+      },
+      {
+        path: "/recommendationsforme",
+        element: <RecommendationForMeContainer />,
       },
     ],
   },
