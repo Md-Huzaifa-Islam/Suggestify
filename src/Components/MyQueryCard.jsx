@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { format } from "date-fns";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const MyQueryCard = ({ data }) => {
   const navigate = useNavigate();
@@ -17,18 +19,29 @@ const MyQueryCard = ({ data }) => {
     _id,
   } = data;
   const handleDelete = () => {
-    // Simulate deletion
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this query?",
-    );
-    if (confirmed) {
-      axios
-        .delete(`http://localhost:5000/query/${_id}`)
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err));
-      alert(`Query with ID  deleted.`);
-      // Add actual deletion logic here (update state or call API)
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/query/${_id}`)
+          .then((res) => {
+            console.log(res.data);
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((err) => toast.error(err));
+      }
+    });
   };
   return (
     <div

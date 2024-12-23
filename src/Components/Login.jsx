@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Contexts/Contexts";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { signInWithEmail, signWithGmail } = useContext(AuthContext);
@@ -10,17 +11,17 @@ const Login = () => {
     const formObject = Object.fromEntries(formData.entries());
     signInWithEmail(formObject.email, formObject.password)
       .then((user) => {
-        console.log(user.user);
+        toast.success(`You have successfully Logged in`);
         e.target.reset();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
   };
 
   //gmail login section
   const handleGmail = () => {
     signWithGmail()
-      .then((user) => console.log(user.user))
-      .catch((err) => console.log(err));
+      .then(() => toast.success(`You have successfully Logged in with google`))
+      .catch((err) => toast.error(err));
   };
   return (
     <div className="hero">

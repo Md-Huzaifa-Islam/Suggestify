@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { AuthContext } from "../Contexts/Contexts";
 import axios from "axios";
 import RecommendationCard from "./RecommendationCard";
+import { toast } from "react-toastify";
 
 const RecommendationsAddAndView = ({ id, data }) => {
   const { user } = useContext(AuthContext);
@@ -35,8 +36,11 @@ const RecommendationsAddAndView = ({ id, data }) => {
     // put the new recommendation to database
     axios
       .put("http://localhost:5000/recommendations", formObject)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res.data);
+        toast.success(`Thanks for your recommendation`);
+      })
+      .catch((err) => toast.error(err));
   };
   return (
     <div>
@@ -93,7 +97,7 @@ const RecommendationsAddAndView = ({ id, data }) => {
             />
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Login</button>
+            <button className="btn btn-primary">Recommend</button>
           </div>
         </form>
       </div>

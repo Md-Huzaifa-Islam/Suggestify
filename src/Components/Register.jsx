@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Contexts/Contexts";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const { singUpWithEmail, UpdateInfo, signWithGmail, setUser } =
@@ -20,16 +21,20 @@ const Register = () => {
               displayName: formObject.name,
               photoURL: formObject.photo,
             });
+            toast.success(`Congrats! Your account is created`);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => toast.error(err));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
   };
   //gmail login section
   const handleGmail = () => {
     signWithGmail()
-      .then((user) => console.log(user.user))
-      .catch((err) => console.log(err));
+      .then((user) => {
+        console.log(user.user);
+        toast.success(`Congrats! Your account is created`);
+      })
+      .catch((err) => toast.error(err));
   };
   return (
     <div className="hero">

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Contexts/Contexts";
 import { format } from "date-fns";
+import Swal from "sweetalert2";
 
 const MyRecommendationsContainer = () => {
   const { user } = useContext(AuthContext);
@@ -14,15 +15,29 @@ const MyRecommendationsContainer = () => {
       .catch((err) => console.log(err));
   }, [user]);
   const handleDelete = (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this recommendation?",
-    );
-    if (confirmDelete) {
-      axios
-        .delete(`http://localhost:5000/recommendations/${id}`)
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err));
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/recommendations/${id}`)
+          .then((res) => {
+            console.log(res.data);
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((err) => console.log(err));
+      }
+    });
   };
 
   return (

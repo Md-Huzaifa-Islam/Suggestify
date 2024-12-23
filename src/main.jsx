@@ -15,6 +15,7 @@ import AllQueriesContainer from "./Components/AllQueriesContainer";
 import QueryDetails from "./Components/QueryDetails";
 import MyRecommendationsContainer from "./Components/MyRecommendationsContainer";
 import RecommendationForMeContainer from "./Components/RecommendationForMeContainer";
+import { ToastContainer } from "react-toastify";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -84,6 +85,18 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </AuthProvider>
   </StrictMode>,
 );
