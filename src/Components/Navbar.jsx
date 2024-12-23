@@ -4,6 +4,17 @@ import { AuthContext } from "../Contexts/Contexts";
 
 const Navbar = () => {
   const { user, SignOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    SignOut()
+      .then(() => {
+        console.log("Sign-out successful.");
+      })
+      .catch((error) => {
+        console.error("Sign-out error:", error);
+      });
+  };
+
   const links = (
     <>
       <li>
@@ -13,22 +24,23 @@ const Navbar = () => {
         <NavLink to={"/queries"}>Queries</NavLink>
       </li>
       {user && (
-        <li>
-          <NavLink to={"/recommendationsforme"}>Recommendations For Me</NavLink>
-        </li>
-      )}
-      {user && (
-        <li>
-          <NavLink to={"/myqueries"}>My Queries</NavLink>
-        </li>
-      )}
-      {user && (
-        <li>
-          <NavLink to={"/myrecommendations"}>My Recommendations</NavLink>
-        </li>
+        <>
+          <li>
+            <NavLink to={"/recommendationsforme"}>
+              Recommendations For Me
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={"/myqueries"}>My Queries</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/myrecommendations"}>My Recommendations</NavLink>
+          </li>
+        </>
       )}
     </>
   );
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -69,20 +81,23 @@ const Navbar = () => {
             Login
           </Link>
         ) : (
-          <button
-            className="btn"
-            onClick={() => {
-              SignOut()
-                .then(() => {
-                  // Sign-out successful.
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-            }}
-          >
-            Logout
-          </button>
+          <div className="flex items-center gap-5">
+            <div className="avatar">
+              <div className="h-10 w-10 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+                <img
+                  src={
+                    user.photoURL ||
+                    "https://i.ibb.co.com/wzvLS2c/placeholder.webp"
+                  }
+                  alt="User Avatar"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+            <button className="btn" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         )}
       </div>
     </div>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Contexts/Contexts";
 
 const Register = () => {
-  const { singUpWithEmail, UpdateInfo, signWithGmail } =
+  const { singUpWithEmail, UpdateInfo, signWithGmail, setUser } =
     useContext(AuthContext);
   //login with email
   const handleSignUp = (e) => {
@@ -14,7 +14,13 @@ const Register = () => {
       .then((user) => {
         console.log(user.user);
         UpdateInfo(formObject.name, formObject.photo)
-          .then(() => console.log("profile updated"))
+          .then(() => {
+            setUser({
+              ...user.user,
+              displayName: formObject.name,
+              photoURL: formObject.photo,
+            });
+          })
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
