@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import RecemmendationsAddandView from "./RecemmendationsAddandView";
 import { useEffect, useState } from "react";
+import RecommendationsAddAndView from "./RecommendationsAddAndView";
 
 const QueryDetails = () => {
   const { id } = useParams();
@@ -46,7 +46,7 @@ const QueryDetails = () => {
         </p>
       </div>
 
-      {data && <RecemmendationsAddandView id={_id} data={data} />}
+      {data && <RecommendationsAddAndView id={_id} data={data} />}
     </div>
   );
 };

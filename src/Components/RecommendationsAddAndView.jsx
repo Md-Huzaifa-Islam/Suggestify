@@ -1,10 +1,20 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { AuthContext } from "../Contexts/Contexts";
 import axios from "axios";
+import RecommendationCard from "./RecommendationCard";
 
-const RecemmendationsAddandView = ({ id, data }) => {
+const RecommendationsAddAndView = ({ id, data }) => {
   const { user } = useContext(AuthContext);
+  //   fetch recommendations from server
+  const [datas, setData] = useState(null);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/recommendations/${id}`)
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err));
+  }, [id]);
+
   // handle add new recommendation
   const handleSubmitRecommendation = (e) => {
     e.preventDefault();
@@ -53,7 +63,7 @@ const RecemmendationsAddandView = ({ id, data }) => {
             <input
               type="text"
               name="product_name"
-              placeholder="email"
+              placeholder="Recommended product Name"
               className="input input-bordered"
               required
             />
@@ -93,57 +103,17 @@ const RecemmendationsAddandView = ({ id, data }) => {
         <h2 className="mb-4 text-xl font-semibold">All Recommendations</h2>
         <div className="space-y-4">
           {/* Recommendation Item */}
-          <div className="rounded-md border p-4 shadow-sm">
-            <p>
-              <strong>Recommender:</strong> Jane Smith (jane.smith@example.com)
-            </p>
-            <p>
-              <strong>Recommended Product:</strong> Product Y
-            </p>
-            <p>
-              <strong>Reason:</strong> It has better features and is more
-              affordable.
-            </p>
-            <img
-              src="https://via.placeholder.com/150"
-              alt="Product Y"
-              className="mt-2 rounded-md"
-            />
-            <p className="mt-2 text-sm text-gray-500">
-              Recommended on: Dec 20, 2024
-            </p>
-          </div>
 
-          {/* Another Recommendation Item */}
-          <div className="rounded-md border p-4 shadow-sm">
-            <p>
-              <strong>Recommender:</strong> Alex Johnson
-              (alex.johnson@example.com)
-            </p>
-            <p>
-              <strong>Recommended Product:</strong> Product Z
-            </p>
-            <p>
-              <strong>Reason:</strong> Excellent reviews and superior customer
-              service.
-            </p>
-            <img
-              src="https://via.placeholder.com/150"
-              alt="Product Z"
-              className="mt-2 rounded-md"
-            />
-            <p className="mt-2 text-sm text-gray-500">
-              Recommended on: Dec 19, 2024
-            </p>
-          </div>
+          {datas &&
+            datas.map((d) => <RecommendationCard key={d._id} data={d} />)}
         </div>
       </div>
     </div>
   );
 };
-RecemmendationsAddandView.propTypes = {
+RecommendationsAddAndView.propTypes = {
   id: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
 };
 
-export default RecemmendationsAddandView;
+export default RecommendationsAddAndView;
