@@ -4,9 +4,11 @@ import axios from "axios";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const MyQueryCard = ({ data }) => {
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
   const {
     boycotting_reason_details,
     created,
@@ -29,8 +31,8 @@ const MyQueryCard = ({ data }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`http://localhost:5000/query/${_id}`)
+        axiosSecure
+          .delete(`/query/${_id}`)
           .then((res) => {
             console.log(res.data);
             Swal.fire({

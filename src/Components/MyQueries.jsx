@@ -1,21 +1,21 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../Contexts/Contexts";
 import MyQueryCard from "./MyQueryCard";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const MyQueries = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const navigate = useNavigate();
-
+  const axiosSecure = useAxiosSecure();
   // get all query from server
   const [data, setData] = useState(null);
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/myqueries?email=${user.email}`)
+    axiosSecure
+      .get(`/myqueries?email=${user.email}`)
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
-  }, [user]);
+  }, [user, axiosSecure]);
 
   return (
     <div className="mx-auto max-w-7xl p-6">

@@ -2,21 +2,20 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Contexts/Contexts";
 import { format } from "date-fns";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const RecommendationForMeContainer = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   // extract data from server
   const [data, setData] = useState(null);
   useEffect(() => {
-    axios
-      .get(
-        `http://localhost:5000/recommendations?email=${user.email}&owner=true`,
-      )
+    axiosSecure
+      .get(`/recommendations?email=${user.email}&owner=true`)
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
-  }, [user]);
-
-  console.log(data);
+  }, [user, axiosSecure]);
 
   return (
     <div className="mx-auto max-w-6xl p-6">

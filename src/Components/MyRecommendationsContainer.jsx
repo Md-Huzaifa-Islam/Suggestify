@@ -1,19 +1,21 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Contexts/Contexts";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const MyRecommendationsContainer = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   // extract data from server
   const [data, setData] = useState(null);
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/recommendations?email=${user.email}`)
+    axiosSecure
+      .get(`/recommendations?email=${user.email}`)
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
-  }, [user]);
+  }, [user, axiosSecure]);
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -25,8 +27,8 @@ const MyRecommendationsContainer = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`http://localhost:5000/recommendations/${id}`)
+        axiosSecure
+          .delete(`/recommendations/${id}`)
           .then((res) => {
             console.log(res.data);
             Swal.fire({

@@ -3,17 +3,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import RecommendationsAddAndView from "./RecommendationsAddAndView";
 import { format } from "date-fns";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const QueryDetails = () => {
   const { id } = useParams();
+  const axiosSecure = useAxiosSecure();
   //data came for this product
   const [data, setData] = useState(null);
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/query/${id}`)
+    axiosSecure
+      .get(`/query/${id}`)
       .then((data) => setData(data.data))
       .catch((err) => console.log(err));
-  }, [id]);
+  }, [id, axiosSecure]);
 
   const {
     boycotting_reason_details,

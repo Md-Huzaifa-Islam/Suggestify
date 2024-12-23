@@ -4,17 +4,20 @@ import { AuthContext } from "../Contexts/Contexts";
 import axios from "axios";
 import RecommendationCard from "./RecommendationCard";
 import { toast } from "react-toastify";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const RecommendationsAddAndView = ({ id, data }) => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   //   fetch recommendations from server
   const [datas, setData] = useState(null);
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/recommendations/${id}`)
+    axiosSecure
+      .get(`/recommendations/${id}`)
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
-  }, [id]);
+  }, [id, axiosSecure]);
 
   // handle add new recommendation
   const handleSubmitRecommendation = (e) => {
@@ -34,8 +37,8 @@ const RecommendationsAddAndView = ({ id, data }) => {
       product_name: data.product_name,
     };
     // put the new recommendation to database
-    axios
-      .put("http://localhost:5000/recommendations", formObject)
+    axiosSecure
+      .put("/recommendations", formObject)
       .then((res) => {
         console.log(res.data);
         toast.success(`Thanks for your recommendation`);
