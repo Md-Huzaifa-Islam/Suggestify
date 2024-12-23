@@ -13,17 +13,7 @@ const AllQueriesCard = ({ data }) => {
     recommendationCount,
     _id,
   } = data;
-  console.log(
-    boycotting_reason_details,
-    created,
-    owner,
-    product_brand,
-    product_image_url,
-    product_name,
-    query_tItle,
-    recommendationCount,
-    _id,
-  );
+
   return (
     <div>
       <div className="max-w-md rounded-lg border bg-white p-7">
