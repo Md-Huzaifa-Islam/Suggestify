@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -8,6 +9,7 @@ const RecentQCard = ({ query }) => {
     query_tItle,
     recommendationCount,
     _id,
+    created,
   } = query;
 
   return (
@@ -23,7 +25,7 @@ const RecentQCard = ({ query }) => {
           <p className="text-2xl">{query_tItle}</p>
           <div className="flex items-center justify-between">
             <span className="">Recommendations: {recommendationCount}</span>
-            <span className="">Posted: 1 day ago</span>
+            <span className="">Posted: {format(created, "dd//MM/yyy")}</span>
           </div>
           <div className="flex items-center justify-between">
             <Link to={`/queryDetails/${_id}`} className="btn btn-primary">

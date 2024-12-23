@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
+import { format } from "date-fns";
 
 const MyQueryCard = ({ data }) => {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ const MyQueryCard = ({ data }) => {
         <strong>Created By:</strong> {owner.name}
       </p>
       <p className="mt-2 text-gray-600">
-        <strong>Created At:</strong> {created}
+        <strong>Created At:</strong> {format(created, "dd//MM/yyy")}
       </p>
 
       {/* Query Actions */}

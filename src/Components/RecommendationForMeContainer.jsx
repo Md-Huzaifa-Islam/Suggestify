@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Contexts/Contexts";
+import { format } from "date-fns";
 
 const RecommendationForMeContainer = () => {
   const { user } = useContext(AuthContext);
@@ -62,7 +63,7 @@ const RecommendationForMeContainer = () => {
                   {recommendation?.Recommending_reason_details}
                 </td>
                 <td className="border border-gray-300 px-4 py-2">
-                  {recommendation?.created}
+                  {format(recommendation?.created, "dd//MM/yyy")}
                 </td>
               </tr>
             ))}
