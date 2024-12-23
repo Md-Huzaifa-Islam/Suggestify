@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../Contexts/Contexts";
+import axios from "axios";
 
 const AddQuery = () => {
   const { user } = useContext(AuthContext);
@@ -14,7 +15,13 @@ const AddQuery = () => {
     };
     formObject.recommendationCount = 0;
     formObject.created = Date.now();
-    console.log(formObject);
+    axios
+      .put(`http://localhost:5000/queries`, formObject)
+      .then((res) => {
+        console.log(res.data);
+        e.target.reset();
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div className="hero">
