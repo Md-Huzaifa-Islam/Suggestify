@@ -1,9 +1,26 @@
-import { useContext } from "react";
-import { AuthContext } from "../Contexts/Contexts";
-import axios from "axios";
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const AddQuery = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const addNewQuery = async (formObject) => {
+    const { data } = await axiosSecure.post(`/queries`, formObject);
+    return data;
+  };
+  const mutation = useMutation({
+    mutationFn: addNewQuery,
+    onSuccess: (data) => {
+      console.log(data);
+      toast.success(`Your query is added `);
+      navigate("/myqueries");
+    },
+    onError: (err) => toast.error(err),
+  });
   const handleAdd = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -15,13 +32,7 @@ const AddQuery = () => {
     };
     formObject.recommendationCount = 0;
     formObject.created = Date.now();
-    axios
-      .put(`http://localhost:5000/queries`, formObject)
-      .then((res) => {
-        console.log(res.data);
-        e.target.reset();
-      })
-      .catch((err) => console.log(err));
+    mutation.mutate(formObject);
   };
   return (
     <div className="hero">

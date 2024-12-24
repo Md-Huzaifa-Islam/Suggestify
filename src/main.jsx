@@ -17,6 +17,7 @@ import MyRecommendationsContainer from "./Components/MyRecommendationsContainer"
 import RecommendationForMeContainer from "./Components/RecommendationForMeContainer";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 const router = createBrowserRouter([
   {
     path: "/",

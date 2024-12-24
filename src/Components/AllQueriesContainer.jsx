@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
 import AllQueriesCard from "./AllQueriesCard";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "./Spinner";
-// fetch functin
+// fetch function
 const getPosts = async () => {
   const { data } = await axios.get(`http://localhost:5000/queries`);
   return data;

@@ -1,15 +1,34 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Spinner from "./Spinner";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const MyRecommendationsContainer = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
+  //delete function
+  const deleteRecommendation = async (id) => {
+    const { data } = await axiosSecure.delete(`/recommendations/${id}`);
+    return data;
+  };
+  //delete mutation
+  const mutation = useMutation({
+    mutationFn: deleteRecommendation,
+    onSuccess: (data) => {
+      console.log("deleted", data);
+      queryClient.invalidateQueries(["myRecommendations"]);
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success",
+      });
+    },
+    onError: (err) => toast.error(err),
+  });
   // extract data from server
   const getMyRecommendations = async () => {
     const { data } = await axiosSecure.get(
@@ -30,7 +49,7 @@ const MyRecommendationsContainer = () => {
       </div>
     );
 
-  // handle delete button clicked
+  //delete button handler
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -42,17 +61,8 @@ const MyRecommendationsContainer = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure
-          .delete(`/recommendations/${id}`)
-          .then((res) => {
-            console.log(res.data);
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-          })
-          .catch((err) => console.log(err));
+        axiosSecure;
+        mutation.mutate(id);
       }
     });
   };

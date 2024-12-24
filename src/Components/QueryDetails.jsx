@@ -58,7 +58,7 @@ const QueryDetails = () => {
         </p>
       </div>
 
-      <RecommendationsAddAndView id={_id} data={data} />
+      <RecommendationsAddAndView id={_id} dataP={data} />
     </div>
   );
 };
