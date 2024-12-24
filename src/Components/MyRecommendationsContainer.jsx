@@ -4,18 +4,33 @@ import { format } from "date-fns";
 import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import Spinner from "./Spinner";
+import { useQuery } from "@tanstack/react-query";
 
 const MyRecommendationsContainer = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   // extract data from server
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    axiosSecure
-      .get(`/recommendations?email=${user.email}`)
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
-  }, [user, axiosSecure]);
+  const getMyRecommendations = async () => {
+    const { data } = await axiosSecure.get(
+      `/recommendations?email=${user.email}`,
+    );
+    return data;
+  };
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["myRecommendations"],
+    queryFn: getMyRecommendations,
+  });
+  if (isLoading) return <Spinner />;
+  if (error)
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+        <button>refresh</button>
+      </div>
+    );
+
+  // handle delete button clicked
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -65,37 +80,34 @@ const MyRecommendationsContainer = () => {
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.map((recommendation, index) => (
-              <tr
-                key={recommendation._id}
-                className="transition-colors hover:bg-gray-50"
-              >
-                <td className="border border-gray-300 px-4 py-2">
-                  {index + 1}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {recommendation?.main_product?.query_tItle}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {recommendation?.product_name}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {recommendation?.Recommending_reason_details}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {format(recommendation?.created, "dd/MM/yyy")}
-                </td>
-                <td className="border border-gray-300 px-4 py-2 text-center">
-                  <button
-                    onClick={() => handleDelete(recommendation?._id)}
-                    className="rounded-md bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+          {data.map((recommendation, index) => (
+            <tr
+              key={recommendation._id}
+              className="transition-colors hover:bg-gray-50"
+            >
+              <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
+              <td className="border border-gray-300 px-4 py-2">
+                {recommendation?.main_product?.query_tItle}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {recommendation?.product_name}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {recommendation?.Recommending_reason_details}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {format(recommendation?.created, "dd/MM/yyy")}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 text-center">
+                <button
+                  onClick={() => handleDelete(recommendation?._id)}
+                  className="rounded-md bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

@@ -1,21 +1,31 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MyQueryCard from "./MyQueryCard";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "./Spinner";
 
 const MyQueries = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   // get all query from server
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    axiosSecure
-      .get(`/myqueries?email=${user.email}`)
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
-  }, [user, axiosSecure]);
+  const getQueries = async () => {
+    const { data } = await axiosSecure.get(`/myqueries?email=${user.email}`);
+    return data;
+  };
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["myQueries"],
+    queryFn: getQueries,
+  });
+  if (isLoading) return <Spinner />;
+  if (error)
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+        <button>refresh</button>
+      </div>
+    );
 
   return (
     <div className="mx-auto max-w-7xl p-6">
@@ -31,7 +41,7 @@ const MyQueries = () => {
       </div>
 
       {/* My Queries Section */}
-      {!data ? (
+      {data.length === 0 ? (
         <div className="text-center text-gray-600">
           <p>No queries found. Click the button above to add your query.</p>
         </div>

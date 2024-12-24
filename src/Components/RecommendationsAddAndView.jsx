@@ -1,23 +1,34 @@
 import { useContext, useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { AuthContext } from "../Contexts/Contexts";
 import axios from "axios";
+import PropTypes from "prop-types";
 import RecommendationCard from "./RecommendationCard";
 import { toast } from "react-toastify";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import Spinner from "./Spinner";
 
 const RecommendationsAddAndView = ({ id, data }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   //   fetch recommendations from server
-  const [datas, setData] = useState(null);
-  useEffect(() => {
-    axiosSecure
-      .get(`/recommendations/${id}`)
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
-  }, [id, axiosSecure]);
+  const getAllRecommendations = async () => {
+    const { data } = await axiosSecure.get(`/recommendations/${id}`);
+    return data;
+  };
+  const { datas, isLoading, error } = useQuery({
+    queryKey: ["allRecommendations", id],
+    queryFn: getAllRecommendations,
+  });
+  if (isLoading) return <Spinner />;
+  else if (error)
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+        <button>refresh</button>
+      </div>
+    );
 
   // handle add new recommendation
   const handleSubmitRecommendation = (e) => {
