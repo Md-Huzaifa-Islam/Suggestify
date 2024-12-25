@@ -17,6 +17,7 @@ import MyRecommendationsContainer from "./Components/MyRecommendationsContainer"
 import RecommendationForMeContainer from "./Components/RecommendationForMeContainer";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import UpdateQueryPage from "./Components/UpdateQueryPage";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +58,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/queryDetails/:id",
-        element: <QueryDetails />,
+        element: (
+          <ProtectedRoute>
+            <QueryDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/update-query/:id",
+        element: <UpdateQueryPage />,
       },
       {
         path: "/myrecommendations",

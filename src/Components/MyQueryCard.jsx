@@ -1,14 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const MyQueryCard = ({ data }) => {
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
   const {
     boycotting_reason_details,
     created,
@@ -20,6 +22,26 @@ const MyQueryCard = ({ data }) => {
     recommendationCount,
     _id,
   } = data;
+
+  //delete function
+  const deleteQuery = async (id) => {
+    const { data } = await axiosSecure.delete(`/query/${id}`);
+    return data;
+  };
+  const mutation = useMutation({
+    mutationFn: deleteQuery,
+    onSuccess: (data) => {
+      console.log(data);
+      queryClient.invalidateQueries(["myQueries"]);
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success",
+      });
+    },
+    onError: (err) => console.log(err),
+  });
+
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -31,17 +53,7 @@ const MyQueryCard = ({ data }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure
-          .delete(`/query/${_id}`)
-          .then((res) => {
-            console.log(res.data);
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-          })
-          .catch((err) => toast.error(err));
+        mutation.mutate(_id);
       }
     });
   };
@@ -69,18 +81,18 @@ const MyQueryCard = ({ data }) => {
 
       {/* Query Actions */}
       <div className="mt-4 flex space-x-3">
-        <button
+        <Link
           className="rounded-md bg-green-500 px-4 py-2 text-white transition hover:bg-green-600"
           onClick={() => navigate(`/querydetails/${_id}`)}
         >
           View Details
-        </button>
-        <button
+        </Link>
+        <Link
           className="rounded-md bg-yellow-500 px-4 py-2 text-white transition hover:bg-yellow-600"
-          onClick={() => navigate(`/update-query/${data.id}`)}
+          onClick={() => navigate(`/update-query/${_id}`)}
         >
           Update
-        </button>
+        </Link>
         <button
           className="rounded-md bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
           onClick={handleDelete}

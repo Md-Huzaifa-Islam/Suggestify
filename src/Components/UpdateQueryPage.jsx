@@ -1,46 +1,65 @@
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import Spinner from "./Spinner";
 
-const AddQuery = () => {
+const UpdateQueryPage = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  const addNewQuery = async (formObject) => {
-    const { data } = await axiosSecure.post(`/queries`, formObject);
+  const { id } = useParams();
+
+  //update function
+  const updateQuery = async (formObject) => {
+    const { data } = await axiosSecure.patch(`/queries`, formObject);
     return data;
   };
+  //update mutation
   const mutation = useMutation({
-    mutationFn: addNewQuery,
+    mutationFn: updateQuery,
     onSuccess: (data) => {
       console.log(data);
-      toast.success(`Your query is added `);
-      navigate("/myqueries");
+      toast.success(`Your query is updated `);
+      navigate(`/update-query/${id}`);
     },
     onError: (err) => toast.error(err),
   });
-  const handleAdd = (e) => {
+
+  //get data of the query
+  const getQueryData = async () => {
+    const { data } = await axiosSecure.get(`/query/${id}`);
+
+    return data;
+  };
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["queryDetails", id],
+    queryFn: getQueryData,
+  });
+  if (isLoading) return <Spinner />;
+  if (error)
+    return (
+      <div>
+        <p>Error: {error.message}</p>
+        <button>refresh</button>
+      </div>
+    );
+
+  //update handler
+  const handleUpdate = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formObject = Object.fromEntries(formData.entries());
-    formObject.owner = {
-      email: user?.email,
-      name: user?.displayName,
-      photo: user?.photoURL,
-    };
-    formObject.recommendationCount = 0;
-    const time = Date.now();
-    formObject.created = time;
-    formObject.lastUpdatedTime = time;
+    formObject.lastUpdatedTime = parseInt(Date.now());
+    formObject.id = data?._id;
     mutation.mutate(formObject);
   };
   return (
     <div className="hero">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">add a query now!</h1>
+          <h1 className="text-5xl font-bold">update a query now!</h1>
           <p className="py-6">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
@@ -48,15 +67,15 @@ const AddQuery = () => {
           </p>
         </div>
         <div className="card w-full max-w-sm shrink-0 bg-base-100 shadow-2xl">
-          <form className="card-body" onSubmit={handleAdd}>
+          <form className="card-body" onSubmit={handleUpdate}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Product Name</span>
               </label>
               <input
                 type="text"
-                placeholder="Product Name"
                 name="product_name"
+                defaultValue={data?.product_name}
                 className="input input-bordered"
                 required
               />
@@ -67,8 +86,8 @@ const AddQuery = () => {
               </label>
               <input
                 type="text"
-                placeholder="Product Brand"
                 name="product_brand"
+                defaultValue={data?.product_brand}
                 className="input input-bordered"
                 required
               />
@@ -79,8 +98,8 @@ const AddQuery = () => {
               </label>
               <input
                 type="url"
-                placeholder="Product Image-URL"
                 name="product_image_url"
+                defaultValue={data?.product_image_url}
                 className="input input-bordered"
                 required
               />
@@ -91,8 +110,8 @@ const AddQuery = () => {
               </label>
               <input
                 type="text"
-                placeholder="Query TItle"
                 name="query_tItle"
+                defaultValue={data?.query_tItle}
                 className="input input-bordered"
                 required
               />
@@ -103,8 +122,8 @@ const AddQuery = () => {
               </label>
               <input
                 type="text"
-                placeholder="Boycotting Reason Details"
                 name="boycotting_reason_details"
+                defaultValue={data?.boycotting_reason_details}
                 className="input input-bordered"
                 required
               />
@@ -119,4 +138,4 @@ const AddQuery = () => {
   );
 };
 
-export default AddQuery;
+export default UpdateQueryPage;
