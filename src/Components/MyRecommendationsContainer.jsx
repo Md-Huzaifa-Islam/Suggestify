@@ -22,6 +22,8 @@ const MyRecommendationsContainer = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(["myRecommendations"]);
       Swal.fire({
+        color: "#ffff",
+        background: "#000",
         title: "Deleted!",
         text: "Your file has been deleted.",
         icon: "success",

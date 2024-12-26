@@ -4,12 +4,23 @@ import Spinner from "./Spinner";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
-
+import { TfiLayoutGrid2, TfiLayoutGrid3 } from "react-icons/tfi";
+import { TbColumns1 } from "react-icons/tb";
 const AllQueriesContainer = () => {
   const [search, setSearch] = useState("");
   // data fetching function
   // fetch function
   const [data, setData] = useState(null);
+  const [layout, setLayout] = useState(1);
+  useEffect(() => {
+    if (window.matchMedia("(min-width: 1024px)").matches) {
+      setLayout(3);
+    } else if (window.matchMedia("(min-width: 768px)").matches) {
+      setLayout(2);
+    } else {
+      setLayout(1);
+    }
+  }, []);
 
   useEffect(() => {
     axios
@@ -36,7 +47,8 @@ const AllQueriesContainer = () => {
           decisions.
         </p>
       </div>
-      <div className="mb-5 flex justify-center">
+      <div className="mb-5 flex items-center justify-between">
+        <div></div>
         <label className="input input-bordered flex w-96 items-center gap-2">
           <input
             type="text"
@@ -59,10 +71,35 @@ const AllQueriesContainer = () => {
             />
           </svg>
         </label>
+        <div className="flex flex-col items-center gap-2 font-medium">
+          <p className="hidden text-white md:flex">Layouts</p>
+          <div className="hidden gap-3 rounded-md border border-white px-3 py-2 text-white md:flex">
+            <div
+              onClick={() => setLayout(3)}
+              className={` ${layout == 3 ? "text-primaryBtn" : "hover:text-red-500"}`}
+            >
+              <TfiLayoutGrid3 size={20} />
+            </div>
+            <div
+              onClick={() => setLayout(2)}
+              className={` ${layout == 2 ? "text-primaryBtn" : "hover:text-red-500"}`}
+            >
+              <TfiLayoutGrid2 size={20} />
+            </div>
+            <div
+              onClick={() => setLayout(1)}
+              className={` ${layout == 1 ? "text-primaryBtn" : "hover:text-red-500"}`}
+            >
+              <TbColumns1 size={20} />
+            </div>
+          </div>
+        </div>
       </div>
       {/* card container section  */}
       {data ? (
-        <div className="grid grid-cols-1 justify-items-center gap-5 gap-y-14 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
+        <div
+          className={`grid grid-cols-1 justify-items-center gap-5 gap-y-14 md:grid-cols-${layout} lg:grid-cols-${layout}`}
+        >
           {data && data.map((d) => <AllQueriesCard key={d._id} data={d} />)}
         </div>
       ) : (

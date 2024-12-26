@@ -31,6 +31,8 @@ const MyQueryCard = ({ data }) => {
       queryClient.invalidateQueries(["myQueries"]);
       Swal.fire({
         title: "Deleted!",
+        color: "#fff",
+        background: "#000",
         text: "Your file has been deleted.",
         icon: "success",
       });
