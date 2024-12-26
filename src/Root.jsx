@@ -9,11 +9,11 @@ const Root = () => {
         <header>
           <Navbar />
         </header>
-        <main>
+        <main className="px-5 md:container md:mx-auto">
           <Outlet />
         </main>
       </div>
-      <footer>
+      <footer className="px-5 md:container md:mx-auto">
         <Footer />
       </footer>
     </div>

@@ -12,7 +12,9 @@ const AllQueriesContainer = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/queries?search=${search}`)
+      .get(
+        `https://product-recommendation-system-server.vercel.app/queries?search=${search}`,
+      )
       .then((res) => setData(res.data))
       .catch((err) => toast.error(err));
   }, [search]);
@@ -54,7 +56,7 @@ const AllQueriesContainer = () => {
       </div>
       {/* card container section  */}
       {data ? (
-        <div className="grid grid-cols-3 grid-rows-2 justify-items-center gap-y-14">
+        <div className="grid grid-cols-3 grid-rows-2 justify-items-center gap-5 gap-y-14">
           {data && data.map((d) => <AllQueriesCard key={d._id} data={d} />)}
         </div>
       ) : (

@@ -64,12 +64,20 @@ const AuthProvider = ({ children }) => {
           email: user?.email,
         };
         axios
-          .post("http://localhost:5000/jwt", payload, { withCredentials: true })
+          .post(
+            "https://product-recommendation-system-server.vercel.app/jwt",
+            payload,
+            { withCredentials: true },
+          )
           .then((res) => console.log(res.data))
           .catch((err) => console.log(err));
       } else {
         axios
-          .post("http://localhost:5000/logout", {}, { withCredentials: true })
+          .post(
+            "https://product-recommendation-system-server.vercel.app/logout",
+            {},
+            { withCredentials: true },
+          )
           .then((res) => console.log(res.data))
           .catch((err) => console.log(err));
       }

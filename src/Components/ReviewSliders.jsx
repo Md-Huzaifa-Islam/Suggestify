@@ -15,7 +15,9 @@ import Spinner from "./Spinner";
 const ReviewSliders = () => {
   // fetch function
   const getReviews = async () => {
-    const { data } = await axios.get(`http://localhost:5000/reviews`);
+    const { data } = await axios.get(
+      `https://product-recommendation-system-server.vercel.app/reviews`,
+    );
     return data;
   };
   const { data, isLoading, error } = useQuery({

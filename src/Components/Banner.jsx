@@ -55,8 +55,10 @@ export default function Banner() {
       </Swiper>
       {/* over text  */}
       <div className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 text-center">
-        <p className="text-7xl/relaxed font-semibold">Find Better, Together</p>
-        <p className="text-lg opacity-80">
+        <p className="text-7xl/relaxed font-semibold lg:text-5xl lg:font-medium">
+          Find Better, Together
+        </p>
+        <p className="mt-0 text-lg opacity-80 lg:mt-5 lg:text-base">
           Explore a wide range of product alternatives through the power of user
           recommendations. Whether you&apos;re looking for the best value or the
           perfect fit for your needs, our community helps you make informed
@@ -64,7 +66,7 @@ export default function Banner() {
         </p>
         <Link
           to={"/queries"}
-          className="bg-primaryBtn mt-8 inline-block transform rounded-full border-none px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 active:font-semibold"
+          className="mt-8 inline-block transform rounded-full border-none bg-primaryBtn px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 active:font-semibold lg:mt-5"
         >
           See All Queries
         </Link>

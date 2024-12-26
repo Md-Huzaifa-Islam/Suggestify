@@ -22,21 +22,21 @@ const AllQueriesCard = ({ data }) => {
           className="mx-auto aspect-square w-6/12 rounded-full object-cover object-center"
         />
         <div className="flex flex-col justify-between">
-          <h2 className="mt-2 text-center text-lg opacity-60">
+          <h2 className="mt-2 text-center text-lg opacity-60 lg:text-base">
             {product_name}
           </h2>
-          <p className="limit-two-lines mb-4 mt-5 text-3xl font-semibold">
+          <p className="limit-two-lines mb-4 mt-5 text-3xl font-semibold lg:text-2xl lg:font-medium">
             {query_tItle}
           </p>
-          <div className="flex items-center justify-between">
-            <span className="text-lg">
+          <div className="flex items-center justify-between gap-2 lg:flex-wrap">
+            <span className="text-lg lg:text-base">
               Recommendations: {recommendationCount}
             </span>
-            <span className="text-lg">
+            <span className="text-lg lg:text-base">
               Posted: {format(created, "dd//MM/yyy")}
             </span>
           </div>
-          <div className="mt-10 flex items-center justify-center">
+          <div className="mt-10 flex items-center justify-center lg:mt-6">
             <Link
               to={`/queryDetails/${_id}`}
               className="inline-block transform rounded-full border-none bg-primaryBtn px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 active:font-semibold"

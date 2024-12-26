@@ -6,7 +6,7 @@ import Spinner from "./Spinner";
 const RecentQContainer = () => {
   const getRecentQueries = async () => {
     const { data } = await axios.get(
-      `http://localhost:5000/queries?recent=true`,
+      `https://product-recommendation-system-server.vercel.app/queries?recent=true`,
     );
     return data;
   };
@@ -36,7 +36,7 @@ const RecentQContainer = () => {
         </p>
       </div>
       {/* card container section  */}
-      <div className="grid grid-cols-3 grid-rows-2 justify-items-center gap-y-14">
+      <div className="grid grid-cols-3 grid-rows-2 justify-items-center gap-5 gap-y-14">
         {data &&
           data.map((query) => <RecentQCard key={query._id} query={query} />)}
       </div>

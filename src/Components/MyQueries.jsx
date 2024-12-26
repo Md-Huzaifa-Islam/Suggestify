@@ -73,7 +73,7 @@ const MyQueries = () => {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-3 justify-items-center gap-y-14">
+        <div className="grid grid-cols-3 justify-items-center gap-5 gap-y-14">
           {data &&
             data.map((query) => <MyQueryCard data={query} key={query._id} />)}
         </div>

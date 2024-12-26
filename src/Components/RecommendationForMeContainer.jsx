@@ -39,8 +39,8 @@ const RecommendationForMeContainer = () => {
       ) : (
         <div className="mx-auto max-w-6xl p-6">
           <h1 className="mb-6 text-center text-4xl font-semibold text-white">
-            Recommendations For Me {"->"}
-            <span>({data && data.length})</span>
+            Recommendations For Me {"-- "}
+            <span>{data && data.length}</span>
           </h1>
           <table className="w-full border-collapse border border-black shadow-sm">
             <thead>
