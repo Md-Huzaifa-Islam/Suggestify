@@ -2,7 +2,7 @@ import logo from "../assets/logos/logo.png";
 import { FaLinkedin, FaFacebook } from "react-icons/fa";
 const Footer = () => {
   return (
-    <div className="mt-32 text-white">
+    <div className="mt-16 border-t border-white py-16 text-white">
       {/* top part  */}
       <div className="flex items-center justify-between">
         {/* 2 sides  */}
@@ -36,7 +36,7 @@ const Footer = () => {
         </div>
       </div>
       {/* bottom part */}
-      <div className="">
+      <div className="mt-5 border-t border-white border-opacity-50 pt-5">
         <p className="text-center">
           &copy; {new Date().getFullYear()} Your Company Name. All rights
           reserved.

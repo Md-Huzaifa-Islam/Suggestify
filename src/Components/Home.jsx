@@ -1,5 +1,6 @@
 import Banner from "./Banner";
 import RecentQContainer from "./RecentQContainer";
+import ReviewContainer from "./ReviewContainer";
 
 const Home = () => {
   return (
@@ -9,6 +10,9 @@ const Home = () => {
       </section>
       <section>
         <RecentQContainer />
+      </section>
+      <section>
+        <ReviewContainer />
       </section>
     </>
   );
