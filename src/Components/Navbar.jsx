@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 // import required modules
 import { EffectFlip, Autoplay } from "swiper/modules";
 import { Tooltip } from "react-tooltip";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { user, SignOut } = useAuth();
@@ -19,10 +20,10 @@ const Navbar = () => {
   const handleLogout = () => {
     SignOut()
       .then(() => {
-        console.log("Sign-out successful.");
+        toast.success(`Good bye ! ${user?.displayName}`);
       })
       .catch((error) => {
-        console.error("Sign-out error:", error);
+        toast.error(error);
       });
   };
 
@@ -272,7 +273,10 @@ const Navbar = () => {
                   <Tooltip id="my-tooltip" />
                 </div>
               </div>
-              <button className="btn" onClick={handleLogout}>
+              <button
+                className="transform rounded-full border-none bg-primaryBtn px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 hover:bg-opacity-80 active:scale-95 active:font-semibold"
+                onClick={handleLogout}
+              >
                 Logout
               </button>
             </div>

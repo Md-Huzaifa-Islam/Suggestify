@@ -1,26 +1,28 @@
-import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../Contexts/Contexts";
 import { toast } from "react-toastify";
 import LoginAnimation from "./LoginAnimation";
 import { FaGoogle } from "react-icons/fa";
 import { motion } from "motion/react";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../Hooks/useAuth";
 
 const Login = () => {
-  const { signInWithEmail, signWithGmail } = useContext(AuthContext);
+  const { signInWithEmail, signWithGmail } = useAuth();
   const navigate = useNavigate();
   const path = useLocation();
   const location = path?.state;
+  if (location) {
+    toast.info("You need to login to view the page");
+  }
   const handleLogin = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formObject = Object.fromEntries(formData.entries());
     signInWithEmail(formObject.email, formObject.password)
-      .then((user) => {
-        console.log(user);
+      .then(() => {
+        // console.log(user);
         navigate(location || "/");
-        toast.success(`You have successfully Logged in`);
+        toast.success(`Welcome Back !!!`);
         e.target.reset();
       })
       .catch((err) => toast.error(err));
@@ -30,7 +32,7 @@ const Login = () => {
   const handleGmail = () => {
     signWithGmail()
       .then(() => {
-        toast.success(`You have successfully Logged in with google`);
+        toast.success(`Welcome Back !!!`);
         navigate(location || "/");
       })
       .catch((err) => toast.error(err));
