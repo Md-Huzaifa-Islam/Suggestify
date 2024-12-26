@@ -2,7 +2,7 @@ import logo from "../assets/logos/logo.png";
 import { FaLinkedin, FaFacebook } from "react-icons/fa";
 const Footer = () => {
   return (
-    <div className="mt-16 border-t border-white py-16 text-white">
+    <div className="mt-16 border-t border-white py-8 text-white md:py-12 lg:py-16 xl:py-16">
       {/* top part  */}
       <div className="flex items-center justify-between">
         {/* 2 sides  */}

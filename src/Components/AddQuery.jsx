@@ -49,7 +49,7 @@ const AddQuery = () => {
       </div>
       <div className="mx-auto w-full max-w-3xl shrink-0 rounded-lg border-2 border-white bg-cardBg pb-8 text-white shadow-2xl shadow-white">
         <form
-          className="card-body grid grid-cols-2 gap-10 gap-y-5 rounded-lg rounded-b-none bg-cardBg"
+          className="card-body grid gap-10 gap-y-5 rounded-lg rounded-b-none bg-cardBg md:grid-cols-2"
           onSubmit={handleAdd}
         >
           <div className="form-control">
@@ -108,7 +108,7 @@ const AddQuery = () => {
               required
             />
           </div>
-          <div className="form-control col-span-2">
+          <div className="form-control md:col-span-2">
             <label className="label">
               <span className="label-text text-lg font-medium text-white">
                 Boycotting Reason Details
@@ -122,7 +122,7 @@ const AddQuery = () => {
               name="boycotting_reason_details"
             ></textarea>
           </div>
-          <div className="form-control col-span-2 mt-6">
+          <div className="form-control mt-6 md:col-span-2">
             <button className="transform rounded-full border-none bg-primaryBtn px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 hover:bg-opacity-80 active:scale-95 active:font-semibold">
               Add the Query
             </button>

@@ -35,12 +35,12 @@ const Login = () => {
       .catch((err) => toast.error(err));
   };
   return (
-    <div className="hero">
-      <div className="hero-content grid grid-cols-2 justify-items-center">
-        <div className="">
+    <div className="md:hero">
+      <div className="md:hero-content md:grid md:grid-cols-2 md:justify-items-center">
+        <div className="hidden md:block">
           <LoginAnimation />
         </div>
-        <div className="w-full max-w-sm">
+        <div className="mx-auto w-full max-w-sm md:mx-0">
           <p className="mb-7 text-center text-4xl font-semibold text-white">
             Login
           </p>

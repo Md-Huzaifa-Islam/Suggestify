@@ -21,21 +21,21 @@ const RecentQCard = ({ query }) => {
           className="mx-auto aspect-square w-6/12 rounded-full object-cover object-center"
         />
         <div className="flex flex-col justify-between">
-          <h2 className="mt-2 text-center text-lg opacity-60 lg:text-base">
+          <h2 className="mt-2 text-center text-base opacity-60 xl:text-lg">
             {product_name}
           </h2>
-          <p className="limit-two-lines lg mb-4 mt-5 text-3xl font-semibold lg:text-2xl lg:font-medium">
+          <p className="limit-two-lines lg mb-4 mt-5 text-2xl font-semibold lg:font-medium xl:text-3xl">
             {query_tItle}
           </p>
-          <div className="flex items-center justify-between gap-2 lg:flex-wrap">
-            <span className="text-lg lg:text-base">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="text-base xl:text-lg">
               Recommendations: {recommendationCount}
             </span>
-            <span className="text-lg lg:text-base">
+            <span className="text-base xl:text-lg">
               Posted: {format(created, "dd//MM/yyy")}
             </span>
           </div>
-          <div className="mt-10 flex items-center justify-center lg:mt-7">
+          <div className="mt-5 flex items-center justify-center md:mt-10 lg:mt-7 xl:mt-10">
             <Link
               to={`/queryDetails/${_id}`}
               className="inline-block transform rounded-full border-none bg-primaryBtn px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 active:font-semibold"

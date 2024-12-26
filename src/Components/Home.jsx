@@ -6,7 +6,7 @@ import ReviewContainer from "./ReviewContainer";
 const Home = () => {
   return (
     <>
-      <section>
+      <section className="">
         <Banner />
       </section>
       <section>

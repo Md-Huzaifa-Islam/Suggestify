@@ -70,7 +70,7 @@ const RecommendationsAddAndView = ({ id, dataP }) => {
     <div className="mt-24 grid gap-12">
       {/* Add Recommendation Form */}
       {dataP?.owner?.email === user?.email ? (
-        <div className="text-center text-4xl font-bold">
+        <div className="text-center text-3xl font-bold sm:text-4xl">
           <p>You can not recommend on your own query</p>
         </div>
       ) : (
@@ -78,7 +78,7 @@ const RecommendationsAddAndView = ({ id, dataP }) => {
           <h2 className="text-center text-3xl font-semibold">
             Add a Recommendation
           </h2>
-          <div className="mx-auto w-full max-w-3xl shrink-0 rounded-lg border-2 border-white bg-cardBg pb-8 text-white shadow-2xl shadow-white">
+          <div className="mx-auto w-full max-w-3xl shrink-0 rounded-lg border-2 border-white bg-cardBg pb-8 text-white shadow-lg shadow-white sm:shadow-2xl">
             <form
               className="card-body grid gap-10 gap-y-5 rounded-lg rounded-b-none bg-cardBg"
               onSubmit={handleSubmitRecommendation}
@@ -152,7 +152,11 @@ const RecommendationsAddAndView = ({ id, dataP }) => {
 
       {/* All Recommendations */}
       <div className="rounded-md p-4 shadow-sm">
-        <h2 className="mb-4 text-3xl font-medium">All Recommendations</h2>
+        <h2 className="mb-4 text-3xl font-medium">
+          {data && data.length == 0
+            ? "No Recommendation Yet"
+            : "All Recommendations"}
+        </h2>
         <div className="space-y-4">
           {/* Render each recommendation */}
           {data &&

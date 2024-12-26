@@ -5,13 +5,13 @@ import PropTypes from "prop-types";
 const HowItWorksStep = ({ animation, title, description }) => {
   return (
     <motion.div
-      className="flex flex-col items-center rounded-xl border-2 border-white bg-cardBg p-6 shadow-sm shadow-white"
+      className="flex flex-col items-center rounded-xl border-2 border-white bg-cardBg p-6 shadow-sm shadow-white sm:w-max lg:w-auto"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
     >
-      <div className="mb-4 flex size-60 items-end justify-center">
+      <div className="mb-4 flex size-24 items-end justify-center sm:size-40 lg:size-60">
         <Lottie animationData={animation} loop={true} />
       </div>
       <h3 className="mb-2 text-2xl font-semibold text-primaryBtn">{title}</h3>

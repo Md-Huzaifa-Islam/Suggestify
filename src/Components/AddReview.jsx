@@ -59,7 +59,7 @@ const AddReview = () => {
           Add a review
         </button>
       ) : (
-        <div className="w-full max-w-lg">
+        <div className="w-full max-w-lg sm:max-w-md lg:max-w-lg">
           (
           <div className="relative mx-auto shrink-0 rounded-lg border-2 border-white bg-cardBg pb-8 text-white shadow-xl shadow-white">
             <div
@@ -70,7 +70,7 @@ const AddReview = () => {
             >
               <IoMdCloseCircle size={40} />
             </div>
-            <p className="mt-8 text-center text-xl font-medium text-primaryBtn">
+            <p className="mx-5 mt-8 text-center text-xl font-medium text-primaryBtn">
               Please, give us your valuable review so that we can improve more
             </p>
             <form
@@ -106,7 +106,7 @@ const AddReview = () => {
                   }}
                 />
               </div>
-              <div className="form-control mt-6">
+              <div className="form-control mt-6 sm:mt-4 lg:mt-6">
                 <button className="transform rounded-full border-none bg-primaryBtn px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 hover:bg-opacity-80 active:scale-95 active:font-semibold">
                   Recommend
                 </button>

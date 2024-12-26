@@ -50,10 +50,10 @@ const Register = () => {
       .catch((err) => toast.error(err));
   };
   return (
-    <div className="hero">
-      <div className="hero-content grid grid-cols-2 justify-items-center">
-        <div className="">{View}</div>
-        <div className="w-full max-w-md">
+    <div className="md:hero">
+      <div className="md:hero-content md:grid md:grid-cols-2 md:justify-items-center">
+        <div className="hidden md:block">{View}</div>
+        <div className="mx-auto w-full max-w-md md:mx-0">
           <p className="mb-7 text-center text-4xl font-semibold text-white">
             Register
           </p>

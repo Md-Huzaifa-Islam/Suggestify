@@ -32,33 +32,35 @@ const RecommendationForMeContainer = () => {
     <>
       {data && data.length == 0 ? (
         <div className="mx-auto max-w-6xl p-6">
-          <h1 className="mb-6 text-center text-4xl font-semibold text-white">
+          <h1 className="mb-6 text-center text-3xl font-semibold text-white md:text-4xl">
             No recommendation for you yet
           </h1>
         </div>
       ) : (
-        <div className="mx-auto max-w-6xl p-6">
-          <h1 className="mb-6 text-center text-4xl font-semibold text-white">
+        <div className="mx-auto max-w-6xl sm:p-6">
+          <h1 className="mx-auto mb-6 max-w-3xl text-center text-3xl font-semibold text-white sm:text-3xl/loose md:mb-10 md:text-4xl/relaxed xl:mb-10">
             Recommendations For Me {"-- "}
             <span>{data && data.length}</span>
           </h1>
           <table className="w-full border-collapse border border-black shadow-sm">
             <thead>
               <tr className="bg-black text-white">
-                <th className="border border-white px-4 py-2 text-left">No.</th>
-                <th className="border border-white px-4 py-2 text-left">
+                <th className="hidden border border-white px-[1px] py-2 text-left sm:px-2 md:table-cell md:px-4">
+                  No.
+                </th>
+                <th className="hidden border border-white px-[1px] py-2 text-left sm:table-cell sm:px-2 md:px-4">
                   Query Title
                 </th>
-                <th className="border border-white px-4 py-2 text-left">
+                <th className="border border-white px-[1px] py-2 text-left sm:px-2 md:px-4">
                   Recommender Name
                 </th>
-                <th className="border border-white px-4 py-2 text-left">
+                <th className="border border-white px-[1px] py-2 text-left sm:px-2 md:px-4">
                   Recommended Product
                 </th>
-                <th className="border border-white px-4 py-2 text-left">
+                <th className="border border-white px-[1px] py-2 text-left sm:px-2 md:px-4">
                   Reason
                 </th>
-                <th className="border border-white px-4 py-2 text-left">
+                <th className="border border-white px-[1px] py-2 text-left sm:px-2 md:px-4">
                   Date
                 </th>
               </tr>
@@ -70,22 +72,22 @@ const RecommendationForMeContainer = () => {
                     key={recommendation._id}
                     className="transition-colors hover:bg-primaryBtn"
                   >
-                    <td className="border border-white px-4 py-2">
+                    <td className="hidden border border-white px-[1px] py-2 sm:px-2 md:table-cell md:px-4">
                       {index + 1}
                     </td>
-                    <td className="border border-white px-4 py-2">
+                    <td className="hidden border border-white px-[1px] py-2 sm:table-cell sm:px-2 md:px-4">
                       {recommendation?.main_product?.query_tItle}
                     </td>
-                    <td className="border border-white px-4 py-2">
+                    <td className="border border-white px-[1px] py-2 sm:px-2 md:px-4">
                       {recommendation?.recommender?.name}
                     </td>
-                    <td className="border border-white px-4 py-2">
+                    <td className="border border-white px-[1px] py-2 sm:px-2 md:px-4">
                       {recommendation?.product_name}
                     </td>
-                    <td className="border border-white px-4 py-2">
+                    <td className="border border-white px-[1px] py-2 sm:px-2 md:px-4">
                       {recommendation?.Recommending_reason_details}
                     </td>
-                    <td className="border border-white px-4 py-2">
+                    <td className="border border-white px-[1px] py-2 sm:px-2 md:px-4">
                       {format(recommendation?.created, "dd//MM/yyy")}
                     </td>
                   </tr>

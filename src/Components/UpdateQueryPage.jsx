@@ -68,7 +68,7 @@ const UpdateQueryPage = () => {
       </div>
       <div className="mx-auto w-full max-w-3xl shrink-0 rounded-lg border-2 border-white bg-cardBg pb-8 text-white shadow-2xl shadow-white">
         <form
-          className="card-body grid grid-cols-2 gap-10 gap-y-5 rounded-lg rounded-b-none bg-cardBg"
+          className="card-body grid gap-10 gap-y-5 rounded-lg rounded-b-none bg-cardBg md:grid-cols-2"
           onSubmit={handleUpdate}
           onChange={() => setUpdate(true)}
         >
@@ -128,7 +128,7 @@ const UpdateQueryPage = () => {
               required
             />
           </div>
-          <div className="form-control col-span-2">
+          <div className="form-control md:col-span-2">
             <label className="label">
               <span className="label-text text-lg font-medium text-white">
                 Boycotting Reason Details
@@ -143,7 +143,7 @@ const UpdateQueryPage = () => {
               name="boycotting_reason_details"
             ></textarea>
           </div>
-          <div className="form-control col-span-2 mt-6">
+          <div className="form-control mt-6 md:col-span-2">
             <button
               onClick={() => console.log("button triggered")}
               className={

@@ -5,23 +5,23 @@ import step2Animation from "../assets/animation/Animation2.json";
 import step3Animation from "../assets/animation/Animation3.json";
 const HowItWorks = () => {
   return (
-    <section className="mx-auto mb-10 mt-20 text-center text-white">
+    <section className="mx-auto mb-6 mt-14 text-center text-white md:mb-10 md:mt-20 xl:mb-10 xl:mt-20">
       <motion.div
-        className="mb-12 text-center"
+        className="mb-12 text-center sm:mb-6 md:mb-12"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-4xl/relaxed font-semibold">
+        <h2 className="text-3xl font-semibold sm:text-3xl/loose md:text-4xl/relaxed">
           Your Guide to Better Choices
         </h2>
-        <p className="text-[17px] opacity-90">
+        <p className="text-base opacity-90 sm:text-base md:text-[17px]">
           Here&apos;s how you can make the most of our platform in three simple
           steps!
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 justify-items-center gap-8 md:grid-cols-3">
+      <div className="grid grid-cols-1 justify-items-center gap-8 sm:gap-5 lg:grid-cols-3 lg:gap-8">
         <HowItWorksStep
           animation={step1Animation}
           title="Post Your Query"

@@ -22,9 +22,11 @@ const AllQueriesContainer = () => {
   return (
     <div>
       {/* header texts  */}
-      <div className="mx-auto mb-10 max-w-3xl text-center text-white">
-        <p className="text-4xl/relaxed font-semibold">Discover All Queries</p>
-        <p className="text-[17px] opacity-90">
+      <div className="mx-auto mb-6 mt-12 max-w-3xl text-center text-white md:mb-10 md:mt-20 xl:mb-10 xl:mt-20">
+        <p className="text-3xl/loose font-semibold sm:text-3xl/loose md:text-4xl/relaxed">
+          Discover All Queries
+        </p>
+        <p className="text-base opacity-90 md:text-[17px]">
           Browse through a collection of product queries from users worldwide.
           Find recommendations, alternatives, and insights to make informed
           decisions.
@@ -56,7 +58,7 @@ const AllQueriesContainer = () => {
       </div>
       {/* card container section  */}
       {data ? (
-        <div className="grid grid-cols-3 grid-rows-2 justify-items-center gap-5 gap-y-14">
+        <div className="grid grid-cols-1 justify-items-center gap-5 gap-y-14 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
           {data && data.map((d) => <AllQueriesCard key={d._id} data={d} />)}
         </div>
       ) : (

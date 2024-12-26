@@ -76,28 +76,30 @@ const MyRecommendationsContainer = () => {
           </h1>
         </div>
       ) : (
-        <div className="mx-auto max-w-6xl p-6">
-          <h1 className="mb-6 text-center text-4xl font-semibold text-white">
-            My Recommendations {"->"}
-            <span>({data && data.length})</span>
+        <div className="mx-auto max-w-6xl sm:p-6">
+          <h1 className="mx-auto mb-10 max-w-3xl text-center text-3xl font-semibold text-white sm:mb-6 sm:text-3xl/loose md:mb-10 md:text-4xl/relaxed">
+            My Recommendations {"-- "}
+            <span>{data && data.length}</span>
           </h1>
           <table className="w-full border-collapse border border-black shadow-sm">
             <thead>
               <tr className="bg-black text-white">
-                <th className="border border-white px-4 py-2 text-left">No</th>
-                <th className="border border-white px-4 py-2 text-left">
+                <th className="hidden border border-white px-1 py-2 text-left sm:px-2 md:table-cell md:px-4">
+                  No
+                </th>
+                <th className="border border-white px-1 py-2 text-left sm:px-2 md:px-4">
                   Query Title
                 </th>
-                <th className="border border-white px-4 py-2 text-left">
+                <th className="border border-white px-1 py-2 text-left sm:px-2 md:px-4">
                   Recommended Product
                 </th>
-                <th className="border border-white px-4 py-2 text-left">
+                <th className="border border-white px-1 py-2 text-left sm:px-2 md:px-4">
                   Reason
                 </th>
-                <th className="border border-white px-4 py-2 text-left">
+                <th className="hidden border border-white px-1 py-2 text-left sm:table-cell sm:px-2 md:px-4">
                   Date
                 </th>
-                <th className="border border-white px-4 py-2 text-center">
+                <th className="border border-white px-1 py-2 text-center sm:px-2 md:px-4">
                   Actions
                 </th>
               </tr>
@@ -109,25 +111,25 @@ const MyRecommendationsContainer = () => {
                     key={recommendation._id}
                     className="transition-colors hover:bg-primaryBtn"
                   >
-                    <td className="border border-white px-4 py-2">
+                    <td className="hidden border border-white px-1 py-2 sm:px-2 md:table-cell md:px-4">
                       {index + 1}
                     </td>
-                    <td className="border border-white px-4 py-2">
+                    <td className="border border-white px-1 py-2 sm:px-2 md:px-4">
                       {recommendation?.main_product?.query_tItle}
                     </td>
-                    <td className="border border-white px-4 py-2">
+                    <td className="border border-white px-1 py-2 sm:px-2 md:px-4">
                       {recommendation?.product_name}
                     </td>
-                    <td className="border border-white px-4 py-2">
+                    <td className="border border-white px-1 py-2 sm:px-2 md:px-4">
                       {recommendation?.Recommending_reason_details}
                     </td>
-                    <td className="border border-white px-4 py-2">
+                    <td className="hidden border border-white px-1 py-2 sm:table-cell sm:px-2 md:px-4">
                       {format(recommendation?.created, "dd/MM/yyy")}
                     </td>
-                    <td className="border border-white px-4 py-2 text-center">
+                    <td className="border border-white px-1 py-2 text-center sm:px-2 md:px-4">
                       <button
                         onClick={() => handleDelete(recommendation?._id)}
-                        className="rounded-md bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
+                        className="rounded-md bg-red-500 px-1 py-2 text-white transition hover:bg-red-600 sm:px-2 md:px-4"
                       >
                         Delete
                       </button>
