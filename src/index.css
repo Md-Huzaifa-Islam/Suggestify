@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: "helvetica";
+  src:
+    url("./assets/fonts/helvetica-webfont.woff2") format("woff2"),
+    url("./assets/fonts/helvetica-webfont.woff") format("woff"),
+    url("./assets/fonts/Helvetica.ttf") format("truetype");
+  font-style: normal;
+}
+.limit-two-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

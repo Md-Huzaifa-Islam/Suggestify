@@ -68,59 +68,77 @@ const MyRecommendationsContainer = () => {
   };
 
   return (
-    <div className="mx-auto max-w-6xl p-6">
-      <h1 className="mb-6 text-2xl font-bold">My Recommendations</h1>
-      <table className="w-full border-collapse border border-gray-200 shadow-sm">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="border border-gray-300 px-4 py-2 text-left">No</th>
-            <th className="border border-gray-300 px-4 py-2 text-left">
-              Query Title
-            </th>
-            <th className="border border-gray-300 px-4 py-2 text-left">
-              Recommended Product
-            </th>
-            <th className="border border-gray-300 px-4 py-2 text-left">
-              Reason
-            </th>
-            <th className="border border-gray-300 px-4 py-2 text-left">Date</th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((recommendation, index) => (
-            <tr
-              key={recommendation._id}
-              className="transition-colors hover:bg-gray-50"
-            >
-              <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
-              <td className="border border-gray-300 px-4 py-2">
-                {recommendation?.main_product?.query_tItle}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {recommendation?.product_name}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {recommendation?.Recommending_reason_details}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {format(recommendation?.created, "dd/MM/yyy")}
-              </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
-                <button
-                  onClick={() => handleDelete(recommendation?._id)}
-                  className="rounded-md bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      {data.length == 0 ? (
+        <div className="mx-auto max-w-6xl p-6">
+          <h1 className="mb-6 text-center text-4xl font-semibold text-white">
+            No recommendation by you yet
+          </h1>
+        </div>
+      ) : (
+        <div className="mx-auto max-w-6xl p-6">
+          <h1 className="mb-6 text-center text-4xl font-semibold text-white">
+            My Recommendations {"->"}
+            <span>({data && data.length})</span>
+          </h1>
+          <table className="w-full border-collapse border border-black shadow-sm">
+            <thead>
+              <tr className="bg-black text-white">
+                <th className="border border-white px-4 py-2 text-left">No</th>
+                <th className="border border-white px-4 py-2 text-left">
+                  Query Title
+                </th>
+                <th className="border border-white px-4 py-2 text-left">
+                  Recommended Product
+                </th>
+                <th className="border border-white px-4 py-2 text-left">
+                  Reason
+                </th>
+                <th className="border border-white px-4 py-2 text-left">
+                  Date
+                </th>
+                <th className="border border-white px-4 py-2 text-center">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="text-white opacity-85 hover:opacity-100">
+              {data &&
+                data.map((recommendation, index) => (
+                  <tr
+                    key={recommendation._id}
+                    className="transition-colors hover:bg-primaryBtn"
+                  >
+                    <td className="border border-white px-4 py-2">
+                      {index + 1}
+                    </td>
+                    <td className="border border-white px-4 py-2">
+                      {recommendation?.main_product?.query_tItle}
+                    </td>
+                    <td className="border border-white px-4 py-2">
+                      {recommendation?.product_name}
+                    </td>
+                    <td className="border border-white px-4 py-2">
+                      {recommendation?.Recommending_reason_details}
+                    </td>
+                    <td className="border border-white px-4 py-2">
+                      {format(recommendation?.created, "dd/MM/yyy")}
+                    </td>
+                    <td className="border border-white px-4 py-2 text-center">
+                      <button
+                        onClick={() => handleDelete(recommendation?._id)}
+                        className="rounded-md bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -58,47 +58,49 @@ const MyQueryCard = ({ data }) => {
     });
   };
   return (
-    <div
-      key={data.id}
-      className="rounded-lg border border-gray-200 bg-white p-5 shadow-lg"
-    >
-      <h3 className="text-xl font-semibold text-gray-800">{query_tItle}</h3>
-      <p className="mt-2 text-gray-600">
-        <strong>Product:</strong> {product_name}
-      </p>
-      <p className="mt-2 text-gray-600">
-        <strong>Brand:</strong> {product_brand}
-      </p>
-      <p className="mt-2 text-gray-600">
-        <strong>Boycotting Reason:</strong> {boycotting_reason_details}
-      </p>
-      <p className="mt-2 text-gray-600">
-        <strong>Created By:</strong> {owner.name}
-      </p>
-      <p className="mt-2 text-gray-600">
-        <strong>Created At:</strong> {format(created, "dd//MM/yyy")}
-      </p>
-
-      {/* Query Actions */}
-      <div className="mt-4 flex space-x-3">
-        <Link
-          className="rounded-md bg-green-500 px-4 py-2 text-white transition hover:bg-green-600"
-          onClick={() => navigate(`/querydetails/${_id}`)}
-        >
-          View Details
-        </Link>
-        <Link
-          className="rounded-md bg-yellow-500 px-4 py-2 text-white transition hover:bg-yellow-600"
-          onClick={() => navigate(`/update-query/${_id}`)}
-        >
-          Update
-        </Link>
-        <button
-          className="rounded-md bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
-          onClick={handleDelete}
-        >
-          Delete
-        </button>
+    <div>
+      <div className="bg-cardBg max-w-md rounded-lg px-5 py-10 text-white transition-shadow duration-300 ease-in-out hover:shadow-xl hover:shadow-white">
+        <img
+          src={product_image_url}
+          alt={product_name}
+          className="mx-auto aspect-square w-6/12 rounded-full object-cover object-center"
+        />
+        <div className="flex flex-col justify-between">
+          <h2 className="mt-2 text-center text-lg opacity-60">
+            {product_name}
+          </h2>
+          <p className="limit-two-lines mb-4 mt-5 text-3xl font-semibold">
+            {query_tItle}
+          </p>
+          <div className="flex items-center justify-between">
+            <span className="text-lg">
+              Recommendations: {recommendationCount}
+            </span>
+            <span className="text-lg">
+              Posted: {format(created, "dd//MM/yyy")}
+            </span>
+          </div>
+          <div className="mt-10 flex items-center justify-center gap-4">
+            <Link
+              className="inline-block transform rounded-full border-none bg-primaryBtn px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 active:font-semibold"
+              onClick={() => navigate(`/querydetails/${_id}`)}
+            >
+              View Details
+            </Link>
+            <Link
+              className="inline-block transform rounded-full border-none bg-green-600 px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 active:font-semibold"
+              onClick={() => navigate(`/update-query/${_id}`)}
+            >
+              Update
+            </Link>
+            <button
+              onClick={handleDelete}
+              className="inline-block transform rounded-full border-none bg-red-600 px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 active:font-semibold"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

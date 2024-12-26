@@ -37,83 +37,97 @@ const AddQuery = () => {
     mutation.mutate(formObject);
   };
   return (
-    <div className="hero">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">add a query now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
-        </div>
-        <div className="card w-full max-w-sm shrink-0 bg-base-100 shadow-2xl">
-          <form className="card-body" onSubmit={handleAdd}>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Product Name</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Product Name"
-                name="product_name"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Product Brand</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Product Brand"
-                name="product_brand"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Product Image-URL</span>
-              </label>
-              <input
-                type="url"
-                placeholder="Product Image-URL"
-                name="product_image_url"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Query TItle</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Query TItle"
-                name="query_tItle"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Boycotting Reason Details</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Boycotting Reason Details"
-                name="boycotting_reason_details"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Add the Query</button>
-            </div>
-          </form>
-        </div>
+    <div className=" ">
+      {/* head section  */}
+      <div className="mx-auto mb-10 max-w-3xl text-center text-white">
+        <p className="text-4xl/relaxed font-semibold">Add Your Query</p>
+        <p className="text-[17px] opacity-90">
+          Have a product question or looking for alternatives? Share your query
+          with the community and get personalized recommendations tailored to
+          your needs
+        </p>
+      </div>
+      <div className="mx-auto w-full max-w-3xl shrink-0 rounded-lg border-2 border-white bg-cardBg pb-8 text-white shadow-2xl shadow-white">
+        <form
+          className="card-body grid grid-cols-2 gap-10 gap-y-5 rounded-lg rounded-b-none bg-cardBg"
+          onSubmit={handleAdd}
+        >
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-lg font-medium text-white">
+                Product Name
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="Product Name"
+              name="product_name"
+              className="input input-bordered border-white bg-cardBg focus:outline-primaryBtn"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-lg font-medium text-white">
+                Product Brand
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="Product Brand"
+              name="product_brand"
+              className="input input-bordered border-white bg-cardBg focus:outline-primaryBtn"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-lg font-medium text-white">
+                Product Image-URL
+              </span>
+            </label>
+            <input
+              type="url"
+              placeholder="Product Image-URL"
+              name="product_image_url"
+              className="input input-bordered border-white bg-cardBg focus:outline-primaryBtn"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-lg font-medium text-white">
+                Query TItle
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="Query TItle"
+              name="query_tItle"
+              className="input input-bordered border-white bg-cardBg focus:outline-primaryBtn"
+              required
+            />
+          </div>
+          <div className="form-control col-span-2">
+            <label className="label">
+              <span className="label-text text-lg font-medium text-white">
+                Boycotting Reason Details
+              </span>
+            </label>
+
+            <textarea
+              className="textarea textarea-bordered border-white bg-cardBg focus:outline-primaryBtn"
+              placeholder="Boycotting Reason Details"
+              required
+              name="boycotting_reason_details"
+            ></textarea>
+          </div>
+          <div className="form-control col-span-2 mt-6">
+            <button className="transform rounded-full border-none bg-primaryBtn px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 hover:bg-opacity-80 active:scale-95 active:font-semibold">
+              Add the Query
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

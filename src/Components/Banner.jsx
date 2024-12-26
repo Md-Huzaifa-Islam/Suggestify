@@ -1,3 +1,6 @@
+import slider1 from "../assets/images/slider1.avif";
+import slider2 from "../assets/images/slider2.jpg";
+import slider3 from "../assets/images/slider3.jpg";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -9,10 +12,11 @@ import "swiper/css/pagination";
 
 // import required modules
 import { EffectFade, Autoplay } from "swiper/modules";
+import { Link } from "react-router-dom";
 
 export default function Banner() {
   return (
-    <div className="mx-auto w-max md:container">
+    <div className="relative mx-auto w-max text-white md:container">
       <Swiper
         spaceBetween={30}
         effect={"fade"}
@@ -22,27 +26,49 @@ export default function Banner() {
         }}
         loop={true}
         modules={[EffectFade, Autoplay]}
-        className="mySwiper aspect-[11/4.8] max-w-[1400px] rounded-xl bg-black"
+        className="mySwiper aspect-[11/4.8] max-w-[1400px] rounded-xl bg-black text-white"
       >
-        <SwiperSlide className="">
+        <SwiperSlide className="relative">
           <img
             className="h-full w-full rounded-xl object-cover object-center"
-            src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQiX1vaoWWbfHRBS-iVYzwFNgUJ7WcjzO_GBXufRHoRW4bi9YLS-YZnZmBx1CXzQSGXkIJEZozD_P-YOUrijreo5Q"
+            src={slider1}
           />
+          <div className="absolute inset-0 bg-black bg-opacity-45"></div>
+          {/* over text  */}
         </SwiperSlide>
-        <SwiperSlide className="">
+        <SwiperSlide className="relative">
           <img
             className="h-full w-full rounded-xl object-cover object-center"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZFSnro5F-KniBWmx8p9ZoeWl4TcPJwHaHPnO9Dc2PgWBFMVtq_mQvXqgCIR5lUnna-cZXOO7j8-Q105jThA84vnJ0VBlI8vRiqxeeg"
+            src={slider2}
           />
+          <div className="absolute inset-0 bg-black bg-opacity-45"></div>
+          {/* over text  */}
         </SwiperSlide>
-        <SwiperSlide className="">
+        <SwiperSlide className="relative">
           <img
             className="h-full w-full rounded-xl object-cover object-center"
-            src="https://files.worldwildlife.org/wwfcmsprod/images/Tiger_resting_Bandhavgarh_National_Park_India/hero_small/6aofsvaglm_Medium_WW226365.jpg"
+            src={slider3}
           />
+          <div className="absolute inset-0 bg-black bg-opacity-45"></div>
+          {/* over text  */}
         </SwiperSlide>
       </Swiper>
+      {/* over text  */}
+      <div className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 text-center">
+        <p className="text-7xl/relaxed font-semibold">Find Better, Together</p>
+        <p className="text-lg opacity-80">
+          Explore a wide range of product alternatives through the power of user
+          recommendations. Whether you&apos;re looking for the best value or the
+          perfect fit for your needs, our community helps you make informed
+          decisions by sharing their experiences and insights.
+        </p>
+        <Link
+          to={"/queries"}
+          className="bg-primaryBtn mt-8 inline-block transform rounded-full border-none px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 active:font-semibold"
+        >
+          See All Queries
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,9 +1,20 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Contexts/Contexts";
 import { toast } from "react-toastify";
-
+import { useLottie } from "lottie-react";
+import { motion } from "motion/react";
+import signupAnimation from "../assets/animation/signup.json";
+import { FaGoogle } from "react-icons/fa";
 const Register = () => {
+  const navigate = useNavigate();
+  // animation
+  const options = {
+    animationData: signupAnimation,
+    loop: true,
+  };
+
+  const { View } = useLottie(options);
   const { singUpWithEmail, UpdateInfo, signWithGmail, setUser } =
     useContext(AuthContext);
   //login with email
@@ -21,6 +32,7 @@ const Register = () => {
               displayName: formObject.name,
               photoURL: formObject.photo,
             });
+            navigate("/");
             toast.success(`Congrats! Your account is created`);
           })
           .catch((err) => toast.error(err));
@@ -32,83 +44,118 @@ const Register = () => {
     signWithGmail()
       .then((user) => {
         console.log(user.user);
+        navigate("/");
         toast.success(`Congrats! Your account is created`);
       })
       .catch((err) => toast.error(err));
   };
   return (
     <div className="hero">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Register now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+      <div className="hero-content grid grid-cols-2 justify-items-center">
+        <div className="">{View}</div>
+        <div className="w-full max-w-md">
+          <p className="mb-7 text-center text-4xl font-semibold text-white">
+            Register
           </p>
-        </div>
-        <div className="card w-full max-w-sm shrink-0 bg-base-100 pb-8 shadow-2xl">
-          <form className="card-body" onSubmit={handleSignUp}>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Name</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Name"
-                name="name"
-                className="input input-bordered"
-                required
-              />
+
+          <motion.div
+            className="w-full max-w-md shrink-0 rounded-lg border-2 border-white bg-cardBg pb-8 text-white shadow-2xl shadow-white"
+            animate={{
+              boxShadow: [
+                "0px 0px 0px 0px white",
+                "0 20px 25px -5px white",
+                "0px 0px 0px 0px white",
+              ],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 2,
+              ease: "easeInOut",
+            }}
+          >
+            <form
+              className="card-body rounded-lg rounded-b-none bg-cardBg"
+              onSubmit={handleSignUp}
+            >
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-lg font-medium text-white">
+                    Name
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  className="input input-bordered border-white bg-cardBg focus:outline-primaryBtn"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-lg font-medium text-white">
+                    Email
+                  </span>
+                </label>
+                <input
+                  type="email"
+                  placeholder="email"
+                  name="email"
+                  className="input input-bordered border-white bg-cardBg focus:outline-primaryBtn"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-lg font-medium text-white">
+                    Password
+                  </span>
+                </label>
+                <input
+                  type="password"
+                  placeholder="password"
+                  name="password"
+                  className="input input-bordered border-white bg-cardBg focus:outline-primaryBtn"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-lg font-medium text-white">
+                    PhotoURL
+                  </span>
+                </label>
+                <input
+                  type="url"
+                  placeholder="PhotoUrl"
+                  name="photo"
+                  className="input input-bordered border-white bg-cardBg focus:outline-primaryBtn"
+                  required
+                />
+              </div>
+              <div className="form-control mt-6">
+                <button className="transform rounded-full border-none bg-primaryBtn px-6 py-2 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 hover:bg-opacity-80 active:scale-95 active:font-semibold">
+                  Register
+                </button>
+              </div>
+            </form>
+            <div className="divider my-0 py-8 text-white before:bg-white after:bg-white">
+              OR
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="email"
-                name="email"
-                className="input input-bordered"
-                required
-              />
+            <div
+              onClick={handleGmail}
+              className="mx-auto flex w-max items-center gap-2 rounded-full border border-white px-5 py-2 transition-all duration-300 ease-in-out hover:scale-105 active:scale-95"
+            >
+              <FaGoogle size={20} color="#4285F4" />
+              <p className="text-lg font-medium">Register with Google</p>
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                placeholder="password"
-                name="password"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">PhotoURL</span>
-              </label>
-              <input
-                type="url"
-                placeholder="PhotoUrl"
-                name="photo"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
-            </div>
-          </form>
-          <div className="divider">OR</div>
-          <button onClick={handleGmail}>Register with Google</button>
-          <p className="mx-auto">
-            Already have an account?{" "}
-            <Link to={"/login"} className="text-xl">
-              Login
-            </Link>
-          </p>
+            <p className="mx-auto mt-5 text-center">
+              Already have an account?{" "}
+              <Link to={"/login"} className="text-xl text-blue-500">
+                Login
+              </Link>
+            </p>
+          </motion.div>
         </div>
       </div>
     </div>

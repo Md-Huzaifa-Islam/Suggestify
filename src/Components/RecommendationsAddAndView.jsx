@@ -22,6 +22,7 @@ const RecommendationsAddAndView = ({ id, dataP }) => {
     onSuccess: (newRecommendation) => {
       console.log(newRecommendation);
       queryClient.invalidateQueries(["allRecommendations", id]);
+      document.getElementById("recommendForm").reset();
       toast.success("Thank you for your recommendations!");
     },
     onError: (err) => toast.error("Error: " + err.message),
@@ -66,74 +67,92 @@ const RecommendationsAddAndView = ({ id, dataP }) => {
   };
 
   return (
-    <div>
+    <div className="mt-24 grid gap-12">
       {/* Add Recommendation Form */}
       {dataP?.owner?.email === user?.email ? (
-        <div>
+        <div className="text-center text-4xl font-bold">
           <p>You can not recommend on your own query</p>
         </div>
       ) : (
-        <div className="mb-6 rounded-md border p-4 shadow-sm">
-          <h2 className="mb-4 text-xl font-semibold">Add a Recommendation</h2>
-          <form className="card-body" onSubmit={handleSubmitRecommendation}>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Recommendation Title</span>
-              </label>
-              <input
-                type="text"
-                name="title"
-                placeholder="Recommendation Title"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Recommended product Name</span>
-              </label>
-              <input
-                type="text"
-                name="product_name"
-                placeholder="Recommended product Name"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Recommended Product Image</span>
-              </label>
-              <input
-                type="url"
-                name="product_image_url"
-                placeholder="Recommended Product Image"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Recommendation reason</span>
-              </label>
-              <input
-                type="text"
-                name="Recommending_reason_details"
-                placeholder="Recommendation reason"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Recommend</button>
-            </div>
-          </form>
+        <div className="mb-6 grid gap-7">
+          <h2 className="text-center text-3xl font-semibold">
+            Add a Recommendation
+          </h2>
+          <div className="mx-auto w-full max-w-3xl shrink-0 rounded-lg border-2 border-white bg-cardBg pb-8 text-white shadow-2xl shadow-white">
+            <form
+              className="card-body grid gap-10 gap-y-5 rounded-lg rounded-b-none bg-cardBg"
+              onSubmit={handleSubmitRecommendation}
+              id="recommendForm"
+            >
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-lg font-medium text-white">
+                    Recommendation Title
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Recommendation Title"
+                  className="input input-bordered border-white bg-cardBg focus:outline-primaryBtn"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-lg font-medium text-white">
+                    Recommended product Name
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="product_name"
+                  placeholder="Recommended product Name"
+                  className="input input-bordered border-white bg-cardBg focus:outline-primaryBtn"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-lg font-medium text-white">
+                    Recommended Product Image
+                  </span>
+                </label>
+                <input
+                  type="url"
+                  name="product_image_url"
+                  placeholder="Recommended Product Image"
+                  className="input input-bordered border-white bg-cardBg focus:outline-primaryBtn"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text text-lg font-medium text-white">
+                    Recommendation reason
+                  </span>
+                </label>
+
+                <textarea
+                  className="textarea textarea-bordered border-white bg-cardBg focus:outline-primaryBtn"
+                  placeholder="Recommendation reason"
+                  required
+                  name="Recommending_reason_details"
+                ></textarea>
+              </div>
+              <div className="form-control mt-6">
+                <button className="transform rounded-full border-none bg-primaryBtn px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 hover:bg-opacity-80 active:scale-95 active:font-semibold">
+                  Recommend
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
 
       {/* All Recommendations */}
-      <div className="rounded-md border p-4 shadow-sm">
-        <h2 className="mb-4 text-xl font-semibold">All Recommendations</h2>
+      <div className="rounded-md p-4 shadow-sm">
+        <h2 className="mb-4 text-3xl font-medium">All Recommendations</h2>
         <div className="space-y-4">
           {/* Render each recommendation */}
           {data &&
