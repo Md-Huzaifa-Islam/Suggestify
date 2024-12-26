@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import Spinner from "./Spinner";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const UpdateQueryPage = () => {
   const [update, setUpdate] = useState(false);
@@ -57,6 +58,9 @@ const UpdateQueryPage = () => {
   };
   return (
     <div className="">
+      <Helmet>
+        <title>Update Query || Suggestify</title>
+      </Helmet>
       {/* head section  */}
       <div className="mx-auto mb-10 max-w-3xl text-center text-white">
         <p className="text-4xl/relaxed font-semibold">Update Query</p>

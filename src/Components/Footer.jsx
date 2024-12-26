@@ -13,15 +13,15 @@ const Footer = () => {
           </div>
           <p className="text-2xl font-semibold">Suggestify</p>
         </div>
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-4">
           <p className="text-3xl font-semibold">Social links</p>
-          <ul className="flex items-center gap-2">
+          <ul className="flex items-center gap-8 text-primaryBtn">
             <li>
               <a
                 href="https://www.facebook.com/Huzaifaislamrokib"
                 target="_blank"
               >
-                <FaFacebook size={30} />
+                <FaFacebook size={35} />
               </a>
             </li>
             <li>
@@ -29,7 +29,7 @@ const Footer = () => {
                 href="https://www.linkedin.com/in/huzaifaislam/"
                 target="_blank"
               >
-                <FaLinkedin size={30} />
+                <FaLinkedin size={35} />
               </a>
             </li>
           </ul>

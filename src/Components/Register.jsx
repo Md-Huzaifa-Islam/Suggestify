@@ -6,6 +6,7 @@ import { useLottie } from "lottie-react";
 import { motion } from "motion/react";
 import signupAnimation from "../assets/animation/signup.json";
 import { FaGoogle } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 const Register = () => {
   const navigate = useNavigate();
   // animation
@@ -51,6 +52,9 @@ const Register = () => {
   };
   return (
     <div className="md:hero">
+      <Helmet>
+        <title>Register || Suggestify</title>
+      </Helmet>
       <div className="md:hero-content md:grid md:grid-cols-2 md:justify-items-center">
         <div className="hidden md:block">{View}</div>
         <div className="mx-auto w-full max-w-md md:mx-0">

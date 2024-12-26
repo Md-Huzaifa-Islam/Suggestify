@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import LoginAnimation from "./LoginAnimation";
 import { FaGoogle } from "react-icons/fa";
 import { motion } from "motion/react";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { signInWithEmail, signWithGmail } = useContext(AuthContext);
@@ -36,6 +37,9 @@ const Login = () => {
   };
   return (
     <div className="md:hero">
+      <Helmet>
+        <title>Login || Suggestify</title>
+      </Helmet>
       <div className="md:hero-content md:grid md:grid-cols-2 md:justify-items-center">
         <div className="hidden md:block">
           <LoginAnimation />

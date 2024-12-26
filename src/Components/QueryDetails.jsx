@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "./Spinner";
+import { Helmet } from "react-helmet-async";
 
 const QueryDetails = () => {
   const { id } = useParams();
@@ -40,6 +41,9 @@ const QueryDetails = () => {
 
   return (
     <div className="mx-auto max-w-4xl text-white">
+      <Helmet>
+        <title>{product_name} || Suggestify</title>
+      </Helmet>
       {/* Query Information */}
       {data && (
         <div className="mx-auto max-w-4xl space-y-8 rounded-lg bg-cardBg p-6 py-16 shadow-lg shadow-white">

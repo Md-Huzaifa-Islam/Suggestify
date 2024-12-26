@@ -3,6 +3,7 @@ import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "./Spinner";
+import { Helmet } from "react-helmet-async";
 
 const RecommendationForMeContainer = () => {
   const { user } = useAuth();
@@ -30,6 +31,9 @@ const RecommendationForMeContainer = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Recommendations for me || Suggestify</title>
+      </Helmet>
       {data && data.length == 0 ? (
         <div className="mx-auto max-w-6xl p-6">
           <h1 className="mb-6 text-center text-3xl font-semibold text-white md:text-4xl">

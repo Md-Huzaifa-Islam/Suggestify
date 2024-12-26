@@ -3,6 +3,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AddQuery = () => {
   const { user } = useAuth();
@@ -38,6 +39,9 @@ const AddQuery = () => {
   };
   return (
     <div className=" ">
+      <Helmet>
+        <title>Add query || Suggestify</title>
+      </Helmet>
       {/* head section  */}
       <div className="mx-auto mb-10 max-w-3xl text-center text-white">
         <p className="text-4xl/relaxed font-semibold">Add Your Query</p>

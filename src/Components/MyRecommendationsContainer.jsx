@@ -5,6 +5,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Spinner from "./Spinner";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const MyRecommendationsContainer = () => {
   const { user } = useAuth();
@@ -69,6 +70,9 @@ const MyRecommendationsContainer = () => {
 
   return (
     <>
+      <Helmet>
+        <title>My recommendations || Suggestify</title>
+      </Helmet>
       {data && data.length == 0 ? (
         <div className="mx-auto max-w-6xl p-6">
           <h1 className="mb-6 text-center text-4xl font-semibold text-white">

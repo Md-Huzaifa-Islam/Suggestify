@@ -3,6 +3,7 @@ import axios from "axios";
 import Spinner from "./Spinner";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const AllQueriesContainer = () => {
   const [search, setSearch] = useState("");
@@ -21,6 +22,9 @@ const AllQueriesContainer = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>All queries || Suggestify</title>
+      </Helmet>
       {/* header texts  */}
       <div className="mx-auto mb-6 mt-12 max-w-3xl text-center text-white md:mb-10 md:mt-20 xl:mb-10 xl:mt-20">
         <p className="text-3xl/loose font-semibold sm:text-3xl/loose md:text-4xl/relaxed">

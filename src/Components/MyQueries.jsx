@@ -4,6 +4,7 @@ import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "./Spinner";
+import { Helmet } from "react-helmet-async";
 
 const MyQueries = () => {
   const { user } = useAuth();
@@ -29,6 +30,9 @@ const MyQueries = () => {
 
   return (
     <div className="">
+      <Helmet>
+        <title>My queries || Suggestify</title>
+      </Helmet>
       {/* Add Query Banner */}
       <div
         className="relative mx-auto mb-12 flex h-64 max-w-7xl items-center justify-center rounded-lg bg-cover bg-center bg-no-repeat text-center sm:mb-14 sm:h-96 md:mb-24 xl:mb-24"
