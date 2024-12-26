@@ -12,6 +12,7 @@ const RecommendationForMeContainer = () => {
     const { data } = await axiosSecure.get(
       `/recommendations?email=${user.email}&owner=true`,
     );
+
     return data;
   };
   const { data, isLoading, error } = useQuery({
@@ -29,7 +30,7 @@ const RecommendationForMeContainer = () => {
 
   return (
     <>
-      {data.length == 0 ? (
+      {data && data.length == 0 ? (
         <div className="mx-auto max-w-6xl p-6">
           <h1 className="mb-6 text-center text-4xl font-semibold text-white">
             No recommendation for you yet

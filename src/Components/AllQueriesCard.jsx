@@ -15,7 +15,7 @@ const AllQueriesCard = ({ data }) => {
 
   return (
     <div>
-      <div className="bg-cardBg max-w-md rounded-lg px-5 py-10 text-white transition-shadow duration-300 ease-in-out hover:shadow-xl hover:shadow-white">
+      <div className="max-w-md rounded-lg bg-cardBg px-5 py-10 text-white transition-shadow duration-300 ease-in-out hover:shadow-xl hover:shadow-white">
         <img
           src={product_image_url}
           alt={product_name}
@@ -41,7 +41,7 @@ const AllQueriesCard = ({ data }) => {
               to={`/queryDetails/${_id}`}
               className="inline-block transform rounded-full border-none bg-primaryBtn px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 active:font-semibold"
             >
-              Show Details
+              Recommend
             </Link>
           </div>
         </div>

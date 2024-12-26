@@ -41,7 +41,7 @@ const AddReview = () => {
     formObject.name = user?.displayName;
     formObject.photo = user?.photoURL;
     formObject.rating = rating;
-    console.log(formObject);
+    formObject.email = user?.email;
     mutation.mutate(formObject);
   };
   return (

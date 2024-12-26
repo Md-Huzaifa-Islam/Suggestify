@@ -36,49 +36,50 @@ const QueryDetails = () => {
     lastUpdatedTime,
     query_tItle,
     _id,
-  } = data;
+  } = data || {};
 
   return (
     <div className="mx-auto max-w-4xl text-white">
       {/* Query Information */}
-      <div className="mx-auto max-w-4xl space-y-8 rounded-lg bg-cardBg p-6 py-16 shadow-lg shadow-white">
-        <div className="flex items-center space-x-4">
-          <img
-            className="h-16 w-16 rounded-full border border-gray-300"
-            src={owner?.photo}
-            alt={owner?.name}
-          />
-          <div>
-            <div className="flex items-center gap-2">
-              <p className="text-xl font-semibold">Md Huzaifa Islam</p>
-              <span>posted this query</span>
+      {data && (
+        <div className="mx-auto max-w-4xl space-y-8 rounded-lg bg-cardBg p-6 py-16 shadow-lg shadow-white">
+          <div className="flex items-center space-x-4">
+            <img
+              className="h-16 w-16 rounded-full border border-gray-300"
+              src={owner?.photo}
+              alt={owner?.name}
+            />
+            <div>
+              <div className="flex items-center gap-2">
+                <p className="text-xl font-semibold">Md Huzaifa Islam</p>
+                <span>posted this query</span>
+              </div>
+              <p className="opacity-70">
+                {created === lastUpdatedTime
+                  ? "Created: " + format(created, "dd//MM/yyy")
+                  : "Last Updated: " + format(lastUpdatedTime, "dd//MM/yyy")}
+              </p>
             </div>
-            <p className="opacity-70">
-              {created === lastUpdatedTime
-                ? "Created: " + format(created, "dd//MM/yyy")
-                : "Last Updated: " + format(lastUpdatedTime, "dd//MM/yyy")}
-            </p>
+          </div>
+          <h1 className="text-center text-3xl font-bold">{query_tItle}</h1>
+
+          <div className="flex flex-col items-center">
+            <img
+              className="size-60 rounded-md object-cover object-center shadow-md shadow-primaryBtn"
+              src={product_image_url}
+              alt={product_name}
+            />
+            <h2 className="mt-4 text-2xl font-bold">{product_name}</h2>
+            <p className="text-sm opacity-90">Brand: {product_brand}</p>
+          </div>
+
+          <div className="space-y-4 rounded-lg bg-mainBg p-6 py-8">
+            <h3 className="text-xl font-semibold">Boycotting Reason</h3>
+            <p className="italic opacity-90">{boycotting_reason_details}</p>
           </div>
         </div>
-        <h1 className="text-center text-3xl font-bold">{query_tItle}</h1>
-
-        <div className="flex flex-col items-center">
-          <img
-            className="size-60 rounded-md object-cover object-center shadow-md shadow-primaryBtn"
-            src={product_image_url}
-            alt={product_name}
-          />
-          <h2 className="mt-4 text-2xl font-bold">{product_name}</h2>
-          <p className="text-sm opacity-90">Brand: {product_brand}</p>
-        </div>
-
-        <div className="space-y-4 rounded-lg bg-mainBg p-6 py-8">
-          <h3 className="text-xl font-semibold">Boycotting Reason</h3>
-          <p className="italic opacity-90">{boycotting_reason_details}</p>
-        </div>
-      </div>
-
-      <RecommendationsAddAndView id={_id} dataP={data} />
+      )}
+      {data && <RecommendationsAddAndView id={_id} dataP={data} />}
     </div>
   );
 };

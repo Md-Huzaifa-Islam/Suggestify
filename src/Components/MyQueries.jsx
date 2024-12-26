@@ -65,7 +65,7 @@ const MyQueries = () => {
         </p>
       </div>
       {/* My Queries Section */}
-      {data.length === 0 ? (
+      {data && data.length === 0 ? (
         <div className="text-center text-white">
           <p>
             No queries found. Click the Add a new query button above to add your

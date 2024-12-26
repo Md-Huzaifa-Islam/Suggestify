@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect } from "react";
 import useAuth from "./useAuth";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:5000",
@@ -12,24 +12,29 @@ const axiosInstance = axios.create({
 const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { SignOut } = useAuth();
+
   useEffect(() => {
-    axios.interceptors.response.use(
+    axiosInstance.interceptors.response.use(
       (res) => {
         return res;
       },
-      (err) => {
-        if (err.status === 401 || err.status === 403) {
+      (error) => {
+        if (error.status == 401 || error.status === 403) {
           SignOut()
-            .then(() => {
-              toast.error(`You are logged out for violating token`);
+            .then((res) => {
+              console.log(res);
               navigate("/login");
+              toast.error(
+                "Your access token is invalid. So you have to log in again",
+              );
             })
-            .catch((err) => toast.error(err));
+            .catch((err) => console.log(err));
         }
-        return Promise.reject(err);
+        return Promise.reject(error);
       },
     );
   }, [SignOut, navigate]);
+
   return axiosInstance;
 };
 

@@ -1,26 +1,22 @@
 import AllQueriesCard from "./AllQueriesCard";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
 import Spinner from "./Spinner";
-// fetch function
-const getPosts = async () => {
-  const { data } = await axios.get(`http://localhost:5000/queries`);
-  return data;
-};
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const AllQueriesContainer = () => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["allQueries"],
-    queryFn: getPosts,
-  });
-  if (isLoading) return <Spinner />;
-  if (error)
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-        <button>refresh</button>
-      </div>
-    );
+  const [search, setSearch] = useState("");
+  // data fetching function
+  // fetch function
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/queries?search=${search}`)
+      .then((res) => setData(res.data))
+      .catch((err) => toast.error(err));
+  }, [search]);
+
   return (
     <div>
       {/* header texts  */}
@@ -32,10 +28,38 @@ const AllQueriesContainer = () => {
           decisions.
         </p>
       </div>
-      {/* card container section  */}
-      <div className="grid grid-cols-3 grid-rows-2 justify-items-center gap-y-14">
-        {data && data.map((d) => <AllQueriesCard key={d._id} data={d} />)}
+      <div className="mb-5 flex justify-center">
+        <label className="input input-bordered flex w-96 items-center gap-2">
+          <input
+            type="text"
+            className="grow"
+            placeholder="Search"
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            className="h-4 w-4 opacity-70"
+          >
+            <path
+              fillRule="evenodd"
+              d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </label>
       </div>
+      {/* card container section  */}
+      {data ? (
+        <div className="grid grid-cols-3 grid-rows-2 justify-items-center gap-y-14">
+          {data && data.map((d) => <AllQueriesCard key={d._id} data={d} />)}
+        </div>
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 };

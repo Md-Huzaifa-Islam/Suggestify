@@ -69,7 +69,7 @@ const MyRecommendationsContainer = () => {
 
   return (
     <>
-      {data.length == 0 ? (
+      {data && data.length == 0 ? (
         <div className="mx-auto max-w-6xl p-6">
           <h1 className="mb-6 text-center text-4xl font-semibold text-white">
             No recommendation by you yet
