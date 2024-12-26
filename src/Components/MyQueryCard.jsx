@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const MyQueryCard = ({ data }) => {
   const navigate = useNavigate();
@@ -26,8 +27,7 @@ const MyQueryCard = ({ data }) => {
   };
   const mutation = useMutation({
     mutationFn: deleteQuery,
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       queryClient.invalidateQueries(["myQueries"]);
       Swal.fire({
         title: "Deleted!",
@@ -35,17 +35,19 @@ const MyQueryCard = ({ data }) => {
         icon: "success",
       });
     },
-    onError: (err) => console.log(err),
+    onError: (err) => toast.error(err),
   });
 
   const handleDelete = () => {
     Swal.fire({
-      title: "Are you sure?",
+      title: "Are you sure you want to delete this?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
+      color: "#fff",
+      background: "#000",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {

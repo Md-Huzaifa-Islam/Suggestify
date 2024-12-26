@@ -12,6 +12,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const provider = new GoogleAuthProvider();
 
@@ -56,7 +57,6 @@ const AuthProvider = ({ children }) => {
   // observer
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log(user);
       setUser(user);
       setLoading(false);
       if (user) {
@@ -69,8 +69,10 @@ const AuthProvider = ({ children }) => {
             payload,
             { withCredentials: true },
           )
-          .then((res) => console.log(res.data))
-          .catch((err) => console.log(err));
+          .then(() => {
+            // data
+          })
+          .catch((err) => toast.error(err));
       } else {
         axios
           .post(
@@ -78,8 +80,10 @@ const AuthProvider = ({ children }) => {
             {},
             { withCredentials: true },
           )
-          .then((res) => console.log(res.data))
-          .catch((err) => console.log(err));
+          .then(() => {
+            // data
+          })
+          .catch((err) => toast.error(err));
       }
     });
 

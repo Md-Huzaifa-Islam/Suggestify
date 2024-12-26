@@ -19,8 +19,7 @@ const UpdateQueryPage = () => {
   //update mutation
   const mutation = useMutation({
     mutationFn: updateQuery,
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       setUpdate(false);
       toast.success(`Your query is updated `);
       navigate(`/querydetails/${id}`);
@@ -149,7 +148,6 @@ const UpdateQueryPage = () => {
           </div>
           <div className="form-control mt-6 md:col-span-2">
             <button
-              onClick={() => console.log("button triggered")}
               className={
                 update
                   ? `transform rounded-full border-none bg-primaryBtn px-6 py-3 text-[17px] font-medium text-white transition-all duration-300 ease-in-out hover:scale-105 hover:bg-opacity-80 active:scale-95 active:font-semibold`

@@ -19,8 +19,7 @@ const RecommendationsAddAndView = ({ id, dataP }) => {
   // Mutation for adding recommendation
   const mutate = useMutation({
     mutationFn: addNewRecommendation,
-    onSuccess: (newRecommendation) => {
-      console.log(newRecommendation);
+    onSuccess: () => {
       queryClient.invalidateQueries(["allRecommendations", id]);
       document.getElementById("recommendForm").reset();
       toast.success("Thank you for your recommendations!");

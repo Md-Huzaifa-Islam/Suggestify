@@ -25,7 +25,6 @@ const Register = () => {
     const formObject = Object.fromEntries(formData.entries());
     singUpWithEmail(formObject.email, formObject.password)
       .then((user) => {
-        console.log(user.user);
         UpdateInfo(formObject.name, formObject.photo)
           .then(() => {
             setUser({
@@ -43,8 +42,7 @@ const Register = () => {
   //gmail login section
   const handleGmail = () => {
     signWithGmail()
-      .then((user) => {
-        console.log(user.user);
+      .then(() => {
         navigate("/");
         toast.success(`Congrats! Your account is created`);
       })

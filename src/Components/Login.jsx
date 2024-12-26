@@ -5,22 +5,26 @@ import { FaGoogle } from "react-icons/fa";
 import { motion } from "motion/react";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../Hooks/useAuth";
+import { useEffect } from "react";
 
 const Login = () => {
   const { signInWithEmail, signWithGmail } = useAuth();
   const navigate = useNavigate();
   const path = useLocation();
   const location = path?.state;
-  if (location) {
-    toast.info("You need to login to view the page");
-  }
+
+  useEffect(() => {
+    if (location) {
+      toast.info("You need to login to view the page");
+    }
+  }, []);
+
   const handleLogin = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formObject = Object.fromEntries(formData.entries());
     signInWithEmail(formObject.email, formObject.password)
       .then(() => {
-        // console.log(user);
         navigate(location || "/");
         toast.success(`Welcome Back !!!`);
         e.target.reset();

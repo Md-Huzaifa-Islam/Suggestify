@@ -22,8 +22,7 @@ const AddReview = () => {
   //   mutation function
   const mutation = useMutation({
     mutationFn: addNewReview,
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       toast.success(`Thanks for your review`);
       document.getElementById("allReviewForm").reset();
       setView(false);

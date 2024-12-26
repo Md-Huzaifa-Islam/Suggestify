@@ -21,14 +21,13 @@ const useAxiosSecure = () => {
       (error) => {
         if (error.status == 401 || error.status === 403) {
           SignOut()
-            .then((res) => {
-              console.log(res);
+            .then(() => {
               navigate("/login");
               toast.error(
                 "Your access token is invalid. So you have to log in again",
               );
             })
-            .catch((err) => console.log(err));
+            .catch((err) => toast.error(err));
         }
         return Promise.reject(error);
       },

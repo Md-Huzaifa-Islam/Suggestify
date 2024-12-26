@@ -19,8 +19,7 @@ const MyRecommendationsContainer = () => {
   //delete mutation
   const mutation = useMutation({
     mutationFn: deleteRecommendation,
-    onSuccess: (data) => {
-      console.log("deleted", data);
+    onSuccess: () => {
       queryClient.invalidateQueries(["myRecommendations"]);
       Swal.fire({
         title: "Deleted!",
@@ -53,10 +52,12 @@ const MyRecommendationsContainer = () => {
   //delete button handler
   const handleDelete = (id) => {
     Swal.fire({
-      title: "Are you sure?",
+      title: "Are you sure you want to delete this?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
+      color: "#fff",
+      background: "#000",
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",

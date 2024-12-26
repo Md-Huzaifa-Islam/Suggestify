@@ -15,8 +15,7 @@ const AddQuery = () => {
   };
   const mutation = useMutation({
     mutationFn: addNewQuery,
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       toast.success(`Your query is added `);
       navigate("/myqueries");
     },
