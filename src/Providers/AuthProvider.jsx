@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
-      setLoading(false);
+
       if (user) {
         const payload = {
           email: user?.email,
@@ -70,7 +70,7 @@ const AuthProvider = ({ children }) => {
             { withCredentials: true },
           )
           .then(() => {
-            // data
+            setLoading(false);
           })
           .catch((err) => toast.error(err));
       } else {
@@ -81,7 +81,7 @@ const AuthProvider = ({ children }) => {
             { withCredentials: true },
           )
           .then(() => {
-            // data
+            setLoading(false);
           })
           .catch((err) => toast.error(err));
       }
