@@ -193,7 +193,7 @@ const Navbar = () => {
 
   return (
     <div className="bg-color1">
-      <div className="navbar mb-8 px-5 py-3 font-helvetica text-white md:container md:mx-auto">
+      <div className="navbar px-5 py-3 font-helvetica text-white md:container md:mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

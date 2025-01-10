@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import MyQueryCard from "./MyQueryCard";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "./Spinner";
 import { Helmet } from "react-helmet-async";
+import AllQueriesCard from "./AllQueriesCard";
+import SectionHeader from "./SectionHeader";
 
 const MyQueries = () => {
   const { user } = useAuth();
@@ -29,13 +30,13 @@ const MyQueries = () => {
     );
 
   return (
-    <div className="">
+    <div>
       <Helmet>
         <title>My queries || Suggestify</title>
       </Helmet>
       {/* Add Query Banner */}
       <div
-        className="relative mx-auto mb-12 flex h-64 max-w-7xl items-center justify-center rounded-lg bg-cover bg-center bg-no-repeat text-center sm:mb-14 sm:h-96 md:mb-24 xl:mb-24"
+        className="relative mx-auto mb-14 flex h-64 items-center justify-center bg-cover bg-center bg-no-repeat text-center sm:h-96 md:mb-16 lg:mb-20"
         style={{
           backgroundImage: "url('https://i.ibb.co.com/YQhhNxf/addpostbg.jpg')",
         }}
@@ -59,27 +60,25 @@ const MyQueries = () => {
         </div>
       </div>
       {/* header text part  */}
-      <div className="mx-auto mb-10 max-w-3xl text-center text-white sm:mb-6 md:mb-10">
-        <p className="text-3xl font-semibold sm:text-3xl/loose md:text-4xl/relaxed">
-          Check out your recent queries
-        </p>
-        <p className="mt-2 text-sm opacity-90 sm:mt-0 sm:text-[17px]">
-          View all your submitted queries in one place. Manage, update, or
-          delete your queries with ease and stay connected with the community.
-        </p>
-      </div>
+      <SectionHeader
+        heading="Check out your recent queries"
+        subHeading="View all your submitted queries in one place. Manage, update, or
+          delete your queries with ease and stay connected with the community."
+      />
       {/* My Queries Section */}
       {data && data.length === 0 ? (
-        <div className="text-center text-white">
+        <div className="px-5 text-center text-white md:container md:mx-auto">
           <p>
             No queries found. Click the Add a new query button above to add your
             query.
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 justify-items-center gap-5 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 justify-items-center gap-5 gap-y-14 px-5 md:container md:mx-auto md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {data &&
-            data.map((query) => <MyQueryCard data={query} key={query._id} />)}
+            data.map((query) => (
+              <AllQueriesCard data={query} key={query._id} owner={true} />
+            ))}
         </div>
       )}
     </div>

@@ -77,14 +77,14 @@ const MyRecommendationsContainer = () => {
         <title>My recommendations || Suggestify</title>
       </Helmet>
       {data && data.length == 0 ? (
-        <div className="mx-auto max-w-6xl p-6">
-          <h1 className="mb-6 text-center text-4xl font-semibold text-white">
+        <div className="mx-auto mt-10 max-w-6xl">
+          <h1 className="text-center text-4xl font-semibold text-white">
             No recommendation by you yet
           </h1>
         </div>
       ) : (
-        <div className="mx-auto max-w-6xl sm:p-6">
-          <h1 className="mx-auto mb-10 max-w-3xl text-center text-3xl font-semibold text-white sm:mb-6 sm:text-3xl/loose md:mb-10 md:text-4xl/relaxed">
+        <div className="mx-auto mt-10 max-w-6xl">
+          <h1 className="mx-auto mb-6 max-w-3xl text-center text-3xl font-semibold text-white sm:text-3xl/loose md:text-4xl/relaxed">
             My Recommendations {"-- "}
             <span>{data && data.length}</span>
           </h1>

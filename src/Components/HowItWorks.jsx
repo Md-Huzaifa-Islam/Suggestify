@@ -1,25 +1,16 @@
-import { motion } from "motion/react";
 import HowItWorksStep from "./HowItWorksStep";
 import step1Animation from "../assets/animation/Animation1.json";
 import step2Animation from "../assets/animation/Animation2.json";
 import step3Animation from "../assets/animation/Animation3.json";
+import SectionHeader from "./SectionHeader";
 const HowItWorks = () => {
   return (
-    <section className="mx-auto mb-6 mt-14 text-center text-white md:mb-10 md:mt-20 xl:mb-10 xl:mt-20">
-      <motion.div
-        className="mb-12 text-center sm:mb-6 md:mb-12"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="text-3xl font-semibold sm:text-3xl/loose md:text-4xl/relaxed">
-          Your Guide to Better Choices
-        </h2>
-        <p className="text-base opacity-90 sm:text-base md:text-[17px]">
-          Here&apos;s how you can make the most of our platform in three simple
-          steps!
-        </p>
-      </motion.div>
+    <section className="mx-auto px-5 text-center text-white md:container">
+      <SectionHeader
+        heading="Your Guide to Better Choices"
+        subHeading="Here's how you can make the most of our platform in three simple
+          steps!"
+      />
 
       <div className="grid grid-cols-1 justify-items-center gap-8 sm:gap-5 lg:grid-cols-3 lg:gap-8">
         <HowItWorksStep

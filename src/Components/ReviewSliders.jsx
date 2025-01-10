@@ -70,6 +70,7 @@ const ReviewSliders = () => {
                     isHalf={true}
                     value={review?.rating}
                     size={30}
+                    edit={false}
                   ></ReactStars>
                 </div>
               </div>

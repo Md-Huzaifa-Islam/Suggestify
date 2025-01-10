@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 
 export default function Banner() {
   return (
-    <div className="container relative mx-auto text-white sm:w-max md:max-w-[720px] lg:max-w-[970px] xl:max-w-[1200px]">
+    <div className="relative w-full text-white md:container md:mx-auto">
       <Swiper
         spaceBetween={30}
         effect={"fade"}
@@ -26,11 +26,11 @@ export default function Banner() {
         }}
         loop={true}
         modules={[EffectFade, Autoplay]}
-        className="mySwiper aspect-[11/8] max-w-[1400px] rounded-md text-white sm:aspect-[11/6.7] sm:rounded-lg md:aspect-[11/5.6] lg:aspect-[11/4.8] lg:rounded-xl xl:aspect-[11/4.8]"
+        className="mySwiper h-[65vh] text-white"
       >
         <SwiperSlide className="relative">
           <img
-            className="h-full w-full rounded-xl object-cover object-center"
+            className="h-full w-full object-cover object-center"
             src={slider1}
           />
           <div className="absolute inset-0 bg-black bg-opacity-45"></div>
@@ -38,7 +38,7 @@ export default function Banner() {
         </SwiperSlide>
         <SwiperSlide className="relative">
           <img
-            className="h-full w-full rounded-xl object-cover object-center"
+            className="h-full w-full object-cover object-center"
             src={slider2}
           />
           <div className="absolute inset-0 bg-black bg-opacity-45"></div>
@@ -46,7 +46,7 @@ export default function Banner() {
         </SwiperSlide>
         <SwiperSlide className="relative">
           <img
-            className="h-full w-full rounded-xl object-cover object-center"
+            className="h-full w-full object-cover object-center"
             src={slider3}
           />
           <div className="absolute inset-0 bg-black bg-opacity-45"></div>

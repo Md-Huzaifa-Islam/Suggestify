@@ -151,7 +151,7 @@ const RecommendationsAddAndView = ({ id, dataP }) => {
 
       {/* All Recommendations */}
       <div className="rounded-md p-4 shadow-sm">
-        <h2 className="mb-4 text-3xl font-medium">
+        <h2 className="mb-4 text-center text-3xl font-medium">
           {data && data.length == 0
             ? "No Recommendation Yet"
             : "All Recommendations"}
